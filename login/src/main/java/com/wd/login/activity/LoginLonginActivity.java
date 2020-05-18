@@ -24,6 +24,9 @@ public class LoginLonginActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                Activity activity= (Activity) ARouter.getInstance().build("/mm/MainActivity").navigation();
                // FragmentManager fragmentManager = getSupportFragmentManager();
+
+
+                //李聪聪分支
             }
         });
     }
