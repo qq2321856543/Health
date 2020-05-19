@@ -12,6 +12,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
+
 //这2个必须要在初始化之前开启。These two lines must be written before init, otherwise these configurations will be //invalid in the init process
             ARouter.openLog();
             ARouter.openDebug();
