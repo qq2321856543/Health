@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 //import com.alibaba.android.arouter.launcher.ARouter;
-//import com.alibaba.android.arouter.launcher.ARouter;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.wd.login.R;
 
@@ -33,7 +33,7 @@ public class LoginLonginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(LoginLonginActivity.this, "sdfs", Toast.LENGTH_SHORT).show();
-              //  Activity activity= (Activity) ARouter.getInstance().build("/mm/MainActivity").navigation();
+                ARouter.getInstance().build("/mm/MainActivity").navigation();
                // FragmentManager fragmentManager = getSupportFragmentManager();
 
 
