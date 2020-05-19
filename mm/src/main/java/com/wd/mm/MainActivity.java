@@ -8,7 +8,7 @@ import android.os.Bundle;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 
-@Route(path = "/mm/MainActivity")
+//@Route(path = "/mm/MainActivity")
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -16,6 +16,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //中发射点发生口角
-        ARouter.getInstance().inject(this);
+//        ARouter.getInstance().inject(this);
     }
 }
