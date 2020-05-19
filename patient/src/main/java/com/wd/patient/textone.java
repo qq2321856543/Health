@@ -1,4 +1,4 @@
 package com.wd.patient;
 
-public class qe {
+public class textone {
 }

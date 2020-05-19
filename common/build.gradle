@@ -14,15 +14,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
 
-        javaCompileOptions {
 
-            annotationProcessorOptions {
-
-                arguments = [moduleName:project.getName()]
-
-            }
-
-        }
     }
 
     buildTypes {
@@ -87,5 +79,5 @@ dependencies {
     api 'org.greenrobot:greendao:3.2.2'
     //arouter
 //    api 'com.alibaba:arouter-api:1.4.1'
-//    api 'com.alibaba:arouter-compiler:1.2.2'
+//    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 }

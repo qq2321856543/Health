@@ -1,4 +1,4 @@
 package com.wd.patient;
 
-public class asd {
+public class texttwo {
 }
