@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 //import com.alibaba.android.arouter.launcher.ARouter;
+//import com.alibaba.android.arouter.launcher.ARouter;
 import com.wd.login.R;
 
 public class LoginLonginActivity extends AppCompatActivity {
@@ -22,7 +23,7 @@ public class LoginLonginActivity extends AppCompatActivity {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Activity activity= (Activity) ARouter.getInstance().build("/mm/MainActivity").navigation();
+             //   Activity activity= (Activity) ARouter.getInstance().build("/mm/MainActivity").navigation();
                // FragmentManager fragmentManager = getSupportFragmentManager();
 
 
