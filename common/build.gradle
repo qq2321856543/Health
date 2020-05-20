@@ -94,4 +94,8 @@ dependencies {
 
     //头条适配
     api 'me.jessyan:autosize:1.2.1'
+
+    //极光IM
+    api 'cn.jiguang.sdk:jmessage:2.9.2'  // 此处以JMessage 2.9.2 版本为例。
+    api 'cn.jiguang.sdk:jcore:2.3.0'  // 此处以JCore 2.3.0 版本为例。
 }
