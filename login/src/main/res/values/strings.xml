@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">login</string>
+    <string name="login_register_et_email">请输入邮箱</string>
+    <string name="login_register_et_pwd">请输入密码</string>
+    <string name="login_register_et_verification">请输入验证码</string>
+    <string name="login_register_et_pwd_agin">请再次输入密码</string>
+    <string name="login_register_et_invitation">请输入邀请码</string>
+    <string name="login_register_et_check">选填</string>
+    <string name="login_register_bt">注册</string>
+    <string name="login_login_bt">登录</string>
+    <string name="login_login_forget">忘记密码</string>
+    <string name="login_login_toregister">暂无账号?立即注册</string>
+    <string name="login_login_orther">其他登录方式</string>
+    <string name="login_forget_complete">完成</string>
+    <string name="login_forget_next">下一步</string>
+    <string name="login_forget_set">请设置新密码</string>
+    <string name="login_forget_set_again">请再次确认密码</string>
 </resources>
