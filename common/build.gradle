@@ -98,4 +98,6 @@ dependencies {
     //极光IM
     api 'cn.jiguang.sdk:jmessage:2.9.2'  // 此处以JMessage 2.9.2 版本为例。
     api 'cn.jiguang.sdk:jcore:2.3.0'  // 此处以JCore 2.3.0 版本为例。
+    //阴影
+    api 'io.github.meetsl:SCardView:1.0'
 }
