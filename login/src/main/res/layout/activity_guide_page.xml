@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:layout_height="match_parent"
+    tools:context=".activity.activity.GuidePageActivity">
+
+    <com.bigkoo.convenientbanner.ConvenientBanner
+        android:layout_width="match_parent"
+        android:id="@+id/cb_guide_page"
+        android:layout_height="match_parent"></com.bigkoo.convenientbanner.ConvenientBanner>
+    <Button
+        android:layout_width="84dp"
+        android:background="@drawable/bt_register_verification"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:text="马上进入"
+        android:textColor="@color/white"
+        android:id="@+id/bt_guide_page"
+        android:visibility="gone"
+        android:layout_height="35dp"/>
+</RelativeLayout>
