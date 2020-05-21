@@ -37,6 +37,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:hint="@string/login_register_et_email"
+                android:inputType="textEmailAddress"
                 android:paddingBottom="10dp"
                 android:id="@+id/et_login_email"
                 android:background="@null"
@@ -70,6 +71,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:hint="@string/login_register_et_pwd"
+                android:inputType="textPassword"
                 android:paddingBottom="10dp"
                 android:id="@+id/et_login_pwd"
                 android:background="@null"
