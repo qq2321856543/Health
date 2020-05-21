@@ -1,11 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#F1F1F1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.InquiryMainActivity">
-    <ImageView
+    <RelativeLayout
+        android:id="@+id/rl1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:background="#FDFDFE"
+        android:layout_height="80dp">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            fresco:failureImage="@mipmap/xiao9"
+            fresco:placeholderImage="@mipmap/xiao9"
+            android:layout_marginLeft="12dp"
+            fresco:roundAsCircle="true"/>
+        <ImageView
+            android:id="@+id/iv_ling"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/common_nav_message_black_n"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"/>
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="#FDFDFE"
+        android:layout_below="@id/rl1"
+        android:layout_marginTop="5dp">
+
+    </android.support.v7.widget.RecyclerView>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab"
+        android:layout_below="@id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="#FDFDFE"
+        android:layout_marginTop="2dp">
+
+    </android.support.design.widget.TabLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_below="@id/tab"
+        android:layout_marginTop="1dp"
+        android:background="#FDFDFE"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
 </RelativeLayout>

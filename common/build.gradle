@@ -100,4 +100,6 @@ dependencies {
     api 'cn.jiguang.sdk:jcore:2.3.0'  // 此处以JCore 2.3.0 版本为例。
     //引导页ConvenientBanner
     api 'com.bigkoo:ConvenientBanner:2.1.4'
+    //阴影
+    api 'io.github.meetsl:SCardView:1.0'
 }
