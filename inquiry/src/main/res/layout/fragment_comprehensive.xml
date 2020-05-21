@@ -6,95 +6,128 @@
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/inquiry_yuan"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="24dp"
         >
 
 
         <com.meetsl.scardview.SCardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_margin="20dp"
             app:cardBackgroundColor="#FDFDFE"
             app:cardShadowStartColor="#57FF4081"
             app:cardShadowEndColor="#03FF4081"
             app:cardCornerRadius="5dp"
-            app:cardElevation="15dp"
+            app:cardElevation="10dp"
             app:cardLightDirection="LT">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <ImageView
                     android:id="@+id/iv_max"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="250dp"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/xiao9"/>
+                    android:src="@mipmap/xiao9" />
+
                 <TextView
                     android:id="@+id/tv_name"
-                    android:layout_below="@id/iv_max"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_max"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="9dp"
-                    android:textSize="14sp"
+                    android:text="曾小贤"
                     android:textColor="#333333"
-                    android:text="曾小贤"/>
+                    android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/tv_type"
-                    android:layout_below="@id/iv_max"
-                    android:layout_toRightOf="@id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_max"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="13dp"
-                    android:textSize="10sp"
+                    android:layout_toRightOf="@id/tv_name"
+                    android:text="副主任医师"
                     android:textColor="#333333"
-                    android:text="副主任医师"/>
+                    android:textSize="10sp" />
+
                 <TextView
                     android:id="@+id/tv_location"
-                    android:layout_below="@id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_name"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
-                    android:textSize="12sp"
+                    android:text="广东省妇幼保健医院"
                     android:textColor="#333333"
-                    android:text="广东省妇幼保健医院"/>
+                    android:textSize="12sp" />
+
                 <TextView
                     android:id="@+id/tv_haoping"
-                    android:layout_below="@id/tv_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_location"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
-                    android:textSize="12sp"
+                    android:text="好评率 98%"
                     android:textColor="#333333"
-                    android:text="好评率 98%"/>
+                    android:textSize="12sp" />
+
                 <TextView
                     android:id="@+id/tv_count"
-                    android:layout_below="@id/tv_location"
-                    android:layout_toRightOf="@id/tv_haoping"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_location"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
-                    android:textSize="12sp"
+                    android:layout_toRightOf="@id/tv_haoping"
+                    android:text="服务患者数 356"
                     android:textColor="#333333"
-                    android:text="服务患者数 356"/>
+                    android:textSize="12sp" />
+
                 <ImageView
+                    android:id="@+id/iv_xiangqing"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@mipmap/common_icon_more_n"
                     android:layout_below="@id/iv_max"
-                    android:layout_marginTop="26dp"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="20dp"/>
+                    android:layout_marginTop="26dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@mipmap/common_icon_more_n" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/tv_haoping"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_price"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="500H币/次"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/bt_ok"
+                        android:layout_width="98dp"
+                        android:layout_height="match_parent"
+                        android:background="#8151F1"
+                        android:text="立即咨询"
+                        android:textColor="#ccc"
+                        android:textSize="16sp" />
+                </LinearLayout>
             </RelativeLayout>
 
         </com.meetsl.scardview.SCardView>

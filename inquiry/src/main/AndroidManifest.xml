@@ -3,6 +3,7 @@
     package="com.wd.inquiry">
 
     <application>
+        <activity android:name=".activity.SpeakActivity"></activity>
         <activity android:name=".activity.InquiryMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

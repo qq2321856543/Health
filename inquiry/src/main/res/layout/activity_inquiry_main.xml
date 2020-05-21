@@ -11,11 +11,11 @@
         android:id="@+id/rl1"
         android:layout_width="match_parent"
         android:background="#FDFDFE"
-        android:layout_height="80dp">
+        android:layout_height="50dp">
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/sdv"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             fresco:failureImage="@mipmap/xiao9"
             fresco:placeholderImage="@mipmap/xiao9"
@@ -23,8 +23,8 @@
             fresco:roundAsCircle="true"/>
         <ImageView
             android:id="@+id/iv_ling"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@mipmap/common_nav_message_black_n"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"

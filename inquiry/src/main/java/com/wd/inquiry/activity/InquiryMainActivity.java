@@ -23,8 +23,11 @@ import com.wd.inquiry.fragment.Fragment_Comprehensive;
 import com.wd.inquiry.fragment.Fragment_Praise;
 import com.wd.inquiry.fragment.Fragment_Price;
 import com.wd.inquiry.fragment.Fragment_Quantity;
+import com.wd.inquiry.icoolor.ICoolor_DoctorList;
 import com.wd.inquiry.icoolor.ICoolor_FindDepartment;
 import com.wd.inquiry.presenter.Presenter_FindDepartment;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,11 +94,13 @@ public class InquiryMainActivity extends BaseAcitvity implements ICoolor_FindDep
         findDepartmentAdapter.setOnclick(new FindDepartmentAdapter.Onclick() {
             @Override
             public void click(int id,int postion) {
+                //条目变色
                 for (FindDepartmentBean.ResultBean resultBean:result){
                     resultBean.setIs(false);
                 }
                 result.get(postion).setIs(true);
                 findDepartmentAdapter.notifyDataSetChanged();
+                EventBus.getDefault().postSticky(id);
             }
         });
     }
