@@ -2,13 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wd.login">
 
-    <!--<application>-->
-        <!--<activity android:name=".activity.LoginLonginActivity"></activity>-->
-    <!--</application>-->
-    <application
-       >
-        <activity android:name=".activity.LoginLonginActivity">
+    <application>
+        <activity android:name=".activity.activity.GuidePageActivity"></activity>
+        <activity android:name=".activity.activity.LoginSetNewPassWordActivity" />
+        <activity android:name=".activity.activity.LoginForgetPassWordActivity" />
+        <activity android:name=".activity.activity.LoginRegisterActivity" />
+        <activity android:name=".activity.activity.LoginLonginActivity"></activity>
+        <activity android:name=".activity.activity.LoginLaunchPageActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
+
 </manifest>

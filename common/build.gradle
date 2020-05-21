@@ -94,4 +94,6 @@ dependencies {
 
     //头条适配
     api 'me.jessyan:autosize:1.2.1'
+    //引导页ConvenientBanner
+    api 'com.bigkoo:ConvenientBanner:2.1.4'
 }
