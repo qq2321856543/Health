@@ -25,6 +25,7 @@ import com.wd.inquiry.fragment.Fragment_Price;
 import com.wd.inquiry.fragment.Fragment_Quantity;
 import com.wd.inquiry.icoolor.ICoolor_FindDepartment;
 import com.wd.inquiry.presenter.Presenter_FindDepartment;
+import com.wd.patient.fragment.PatientHomePageFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,10 +73,15 @@ public class InquiryMainActivity extends BaseAcitvity implements ICoolor_FindDep
         list.add(new Fragment_Praise());
         list.add(new Fragment_Quantity());
         list.add(new Fragment_Price());
+        //测试添加病友圈fragment
+        list.add(new PatientHomePageFragment());
+
+
         tabs.add("综合");
         tabs.add("好评");
         tabs.add("咨询数");
         tabs.add("价格 ▼");
+        tabs.add("病友圈");
         FragmentPageAdap fragmentPageAdap = new FragmentPageAdap(getSupportFragmentManager());
         vp.setAdapter(fragmentPageAdap);
         tab.setupWithViewPager(vp);

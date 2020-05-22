@@ -49,6 +49,8 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:hint="请输入病状的关键字"
+                android:textSize="12sp"
+                android:background="@drawable/sou_bian"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content"/>

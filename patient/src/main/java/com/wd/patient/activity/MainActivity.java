@@ -3,7 +3,6 @@ package com.wd.patient.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.wd.common.R2;
 import com.wd.patient.R;
 
 import butterknife.BindView;
