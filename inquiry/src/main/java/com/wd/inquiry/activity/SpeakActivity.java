@@ -17,8 +17,12 @@ import com.wd.inquiry.R2;
 
 import butterknife.BindView;
 import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.callback.GetUserInfoCallback;
+import cn.jpush.im.android.api.content.MessageContent;
+import cn.jpush.im.android.api.content.TextContent;
 import cn.jpush.im.android.api.model.Conversation;
 import cn.jpush.im.android.api.model.Message;
+import cn.jpush.im.android.api.model.UserInfo;
 import cn.jpush.im.api.BasicCallback;
 
 public class SpeakActivity extends BaseAcitvity {
@@ -55,13 +59,13 @@ public class SpeakActivity extends BaseAcitvity {
                 finish();
             }
         });
-        Conversation singleConversation = Conversation.createSingleConversation("acZ0Uy767986297", "c7f6a1d56cb8da740fd18bfa");
-        Message message = JMessageClient.createSingleTextMessage("acZ0Uy767986297", "c7f6a1d56cb8da740fd18bfa", "你好啊");
-        JMessageClient.sendMessage(message);
-        message.setOnSendCompleteCallback(new BasicCallback() {
+        String name="acZ0Uy767986297";
+        String appkey="c7f6a1d56cb8da740fd18bfa";
+
+        JMessageClient.getUserInfo("username", "appKey", new GetUserInfoCallback() {
             @Override
-            public void gotResult(int i, String s) {
-                Toast.makeText(SpeakActivity.this, "回调"+s, Toast.LENGTH_SHORT).show();
+            public void gotResult(int responseCode, String responseMessage, UserInfo info) {
+                // 获取到跨应用的用户信息
             }
         });
     }

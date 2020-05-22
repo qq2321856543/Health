@@ -6,6 +6,8 @@ import android.content.Context;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
+import cn.jpush.im.android.api.JMessageClient;
+
 public class BaseApplication extends Application {
 
     private static Context context;
@@ -14,11 +16,14 @@ public class BaseApplication extends Application {
         super.onCreate();
         context = getApplicationContext();
         Fresco.initialize(this);
-//这2个必须要在初始化之前开启。These two lines must be written before init, otherwise these configurations will be //invalid in the init process
             ARouter.openLog();
             ARouter.openDebug();
-            //  Turn on debugging mode (If you are running in InstantRun mode, you must turn on debug mode! Online version //needs to be closed, otherwise there is a security risk)
-        ARouter.init(this);   //初始化SDK   As early as possible, it is recommended to initialize in the
+        ARouter.init(this);
+
+        JMessageClient.setDebugMode(true);
+        JMessageClient.init(getApplicationContext(), true);
+        //注册全局事件监听类
+        //JMessageClient.registerEventReceiver(new GlobalEventListener(getApplicationContext()));
     }
     public static Context getContext(){
         return context;
