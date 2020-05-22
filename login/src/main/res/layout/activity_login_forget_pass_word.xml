@@ -92,6 +92,7 @@
         android:layout_width="280dp"
         android:layout_height="36dp"
         android:textColor="#3087ea"
+        android:id="@+id/bt_next"
         android:textSize="14sp"
         android:background="@drawable/bt_forget_next"
         android:text="@string/login_forget_next"

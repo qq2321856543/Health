@@ -37,10 +37,11 @@
 
             <EditText
                 android:layout_width="wrap_content"
-                android:hint="@string/login_register_et_email"
+                android:hint="@string/login_forget_set"
                 android:paddingBottom="10dp"
                 android:id="@+id/et_set_email"
                 android:background="@null"
+                android:inputType="textPassword"
                 android:layout_marginTop="2dp"
                 android:textSize="14sp"
                 android:layout_marginLeft="16dp"
@@ -69,10 +70,11 @@
             android:layout_height="wrap_content">
             <EditText
                 android:layout_width="wrap_content"
-                android:hint="@string/login_register_et_verification"
+                android:hint="@string/login_forget_set_again"
                 android:paddingBottom="10dp"
                 android:id="@+id/et_set_verification"
                 android:background="@null"
+                android:inputType="textPassword"
                 android:layout_marginTop="2dp"
                 android:textSize="14sp"
                 android:layout_marginLeft="16dp"
