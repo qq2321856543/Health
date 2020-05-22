@@ -1,6 +1,8 @@
 package com.wd.inquiry.fragment;
 
 import android.content.Intent;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,6 +15,7 @@ import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.inquiry.R;
 import com.wd.inquiry.R2;
 import com.wd.inquiry.activity.SpeakActivity;
+import com.wd.inquiry.adapter.DoctorListAdapter;
 import com.wd.inquiry.bean.DoctorListBean;
 import com.wd.inquiry.icoolor.ICoolor_DoctorList;
 import com.wd.inquiry.presenter.Presenter_DoctorList;
@@ -41,6 +44,8 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
     TextView tv_count;
     ImageView iv_xiangqing;
     private TextView tv_price;
+    @BindView(R2.id.rv)
+    RecyclerView rv;
 
     @Override
     protected BasePresenter initPresenter() {
@@ -88,6 +93,20 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
         tv_haoping.setText("好评率 "+resultBean.getPraise()+"%");
         tv_count.setText("服务患者数"+resultBean.getServerNum());
         tv_price.setText(resultBean.getServicePrice()+"H币/次");
+
+
+
+        //适配器
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false) {
+            @Override
+            public boolean canScrollHorizontally() {
+                return false;
+            }
+        };
+        rv.setLayoutManager(layoutManager);
+        DoctorListAdapter doctorListAdapter = new DoctorListAdapter(getContext(), result);
+        rv.setAdapter(doctorListAdapter);
+        //rv.canScrollHorizontally();
     }
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void getId(Integer id){

@@ -5,9 +5,9 @@
     android:background="#FDFDFE"
     android:layout_height="match_parent">
     <RelativeLayout
+        android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="24dp"
         >
@@ -132,5 +132,15 @@
 
         </com.meetsl.scardview.SCardView>
     </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_height="110dp">
+
+    </android.support.v7.widget.RecyclerView>
+    
 
 </RelativeLayout>
