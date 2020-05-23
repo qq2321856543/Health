@@ -132,15 +132,37 @@
 
         </com.meetsl.scardview.SCardView>
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"
+        android:layout_height="110dp">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_marginLeft="33dp"
         android:layout_marginRight="33dp"
-        android:layout_height="110dp">
+        android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
-    
+        <ImageView
+            android:id="@+id/iv_lift"
+            android:layout_width="13dp"
+            android:layout_height="12dp"
+            android:src="@mipmap/common_list_previous_n"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"/>
+        <ImageView
+            android:id="@+id/iv_right"
+            android:layout_width="13dp"
+            android:layout_height="12dp"
+            android:src="@mipmap/common_information_next_n"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

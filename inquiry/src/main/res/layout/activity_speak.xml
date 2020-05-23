@@ -40,7 +40,8 @@
             android:id="@+id/et"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/inquiry_yuan1"/>
         <Button
             android:id="@+id/bt_fasong"
             android:layout_width="80dp"

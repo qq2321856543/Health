@@ -32,11 +32,11 @@ public class BaseApplication extends Application {
         JMessageClient.init(getApplicationContext(), true);
         //注册全局事件监听类
         JMessageClient.registerEventReceiver(new GlobalEventListener(getApplicationContext()));
-        String name1="acZ0Uy767986297";
-        String pwd1="B0sZsanhlMXzcNnYelemuG39oxFL3iHDi0h5r/3rWb+8bXewRyrb8N+iaHpSo4FbOIcFsn3GEqgS6G3LgBXdFCAEm7BUCNedV0MG4pgVBAhpISO+Wlcog03bxAjzV5TVERjGgZPjdbn6hEGSJfHyvWEz7p8vy+vWjT9aNTAQj2w=";
+        String name1="zhengha123";
+        String pwd1= "88888";
         String name2="zhenghaofei";
         String pwd2="666666";
-//        JMessageClient.register(name2, pwd2, new BasicCallback() {
+//        JMessageClient.register(name1, pwd1, new BasicCallback() {
 //            @Override
 //            public void gotResult(int code, String desc) {
 //                if (code == 0) {
@@ -51,17 +51,17 @@ public class BaseApplication extends Application {
 //            }
 //        });
 
-        try {
-            s = RsaCoder.decryptByPublicKey(pwd1);
-            Log.i("xxx","s:"+s);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        String md5 = MD.MD5(s);
-        Log.i("xxx","md5:"+md5);
+//        try {
+//            s = RsaCoder.decryptByPublicKey(pwd1);
+//            Log.i("xxx","s:"+s);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        String md5 = MD.MD5(s);
+//        Log.i("xxx","md5:"+md5);
 
         //登录
-        JMessageClient.login(name2, pwd2, new BasicCallback() {
+        JMessageClient.login(name1, pwd1, new BasicCallback() {
             @Override
             public void gotResult(int i, String s) {
                 Log.i("xxx",""+i+"///"+s);

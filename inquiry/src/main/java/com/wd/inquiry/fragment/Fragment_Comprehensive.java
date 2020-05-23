@@ -46,7 +46,10 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
     private TextView tv_price;
     @BindView(R2.id.rv)
     RecyclerView rv;
-
+    @BindView(R2.id.iv_lift)
+    ImageView iv_lift;
+    @BindView(R2.id.iv_right)
+    ImageView iv_right;
     @Override
     protected BasePresenter initPresenter() {
         return new Presenter_DoctorList(this);
@@ -70,13 +73,7 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
         if (presenter != null) {
             ((ICoolor_DoctorList.IPresenter)presenter).getDoctorList(7,1,0,1,10);
         }
-        bt_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), SpeakActivity.class);
-                startActivity(intent);
-            }
-        });
+
     }
 
     @Override
@@ -93,20 +90,55 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
         tv_haoping.setText("好评率 "+resultBean.getPraise()+"%");
         tv_count.setText("服务患者数"+resultBean.getServerNum());
         tv_price.setText(resultBean.getServicePrice()+"H币/次");
+        resultBean.setIs(true);
 
 
 
         //适配器
-        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false) {
-            @Override
-            public boolean canScrollHorizontally() {
-                return false;
-            }
-        };
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
+//        {
+//            @Override
+//            public boolean canScrollHorizontally() {
+//            return false;
+//        }
+//        };
         rv.setLayoutManager(layoutManager);
         DoctorListAdapter doctorListAdapter = new DoctorListAdapter(getContext(), result);
         rv.setAdapter(doctorListAdapter);
-        //rv.canScrollHorizontally();
+        doctorListAdapter.OnClick(new DoctorListAdapter.setOnclick() {
+            @Override
+            public void click(int id) {
+                for (DoctorListBean.ResultBean list:result){
+                    list.setIs(false);
+                    if (list.getDoctorId()==id){
+                        list.setIs(true);
+                        Glide.with(getContext()).load(list.getImagePic()).into(iv_max);
+                        tv_name.setText(list.getDoctorName());
+                        tv_type.setText(list.getJobTitle());
+                        tv_location.setText(list.getInauguralHospital());
+                        tv_haoping.setText("好评率 "+list.getPraise()+"%");
+                        tv_count.setText("服务患者数"+list.getServerNum());
+                        tv_price.setText(list.getServicePrice()+"H币/次");
+                    }
+                }
+                doctorListAdapter.notifyDataSetChanged();
+            }
+
+        });
+        iv_max.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (DoctorListBean.ResultBean list:result){
+                    if (list.getIs()){
+                        Intent intent = new Intent(getContext(), SpeakActivity.class);
+                        intent.putExtra("id",list.getDoctorId());
+                        startActivity(intent);
+                        getActivity().overridePendingTransition(R.anim.translate,R.anim.translateleft);
+                    }
+                }
+
+            }
+        });
     }
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void getId(Integer id){

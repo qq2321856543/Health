@@ -17,6 +17,7 @@ import java.util.List;
 public class DoctorListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     List<DoctorListBean.ResultBean> list;
+    private setOnclick msetOnclick;
 
     public DoctorListAdapter(Context context, List<DoctorListBean.ResultBean> list) {
         this.context = context;
@@ -35,8 +36,26 @@ public class DoctorListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         Glide.with(context).load(list.get(i).getImagePic()).into(((ViewHolder)viewHolder).iv);
         ((ViewHolder)viewHolder).tv_name.setText(list.get(i).getDoctorName());
-    }
+        if (list.get(i).getIs()){
+            ((ViewHolder)viewHolder).tv_name.setBackgroundColor(0xff3086E9);
 
+        }else {
+            ((ViewHolder)viewHolder).tv_name.setBackgroundColor(0xff989898);
+
+        }
+        ((ViewHolder)viewHolder).iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                msetOnclick.click(list.get(i).getDoctorId());
+            }
+        });
+    }
+    public void OnClick(setOnclick setOnclick){
+        msetOnclick = setOnclick;
+    }
+    public interface setOnclick{
+        void click(int id);
+    }
     @Override
     public int getItemCount() {
         return list.size();

@@ -82,11 +82,13 @@ public class InquiryMainActivity extends BaseAcitvity implements ICoolor_FindDep
         FragmentPageAdap fragmentPageAdap = new FragmentPageAdap(getSupportFragmentManager());
         vp.setAdapter(fragmentPageAdap);
         tab.setupWithViewPager(vp);
+
     }
 
     @Override
     public void getFindDepartmentSuccess(FindDepartmentBean findDepartmentBean) {
         List<FindDepartmentBean.ResultBean> result = findDepartmentBean.getResult();
+        result.get(0).setIs(true);
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
         rv.setLayoutManager(layoutManager);
         FindDepartmentAdapter findDepartmentAdapter = new FindDepartmentAdapter(this, result);

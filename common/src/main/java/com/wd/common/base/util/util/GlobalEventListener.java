@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import cn.jpush.im.android.api.JMessageClient;
@@ -28,6 +30,7 @@ public class GlobalEventListener {
         JMessageClient.registerEventReceiver(this);
         Log.i("xxx","GlobalEventListener");
 
+
     }
     public void onEvent(OfflineMessageEvent event) {
         List<Message> msgs = event.getOfflineMessageList();
@@ -35,6 +38,7 @@ public class GlobalEventListener {
             TextContent textContent= (TextContent) msg.getContent();
             String text = textContent.getText();
             Log.i("xxx","消息:"+text);
+            EventBus.getDefault().postSticky(text);
         }
     }
     public void onEvent(MessageEvent event) {
@@ -42,6 +46,8 @@ public class GlobalEventListener {
         TextContent textContent = (TextContent) msg.getContent();
         String text = textContent.getText();
         Log.i("xxx","消息:"+text);
+        EventBus.getDefault().postSticky(text);
+
 
     }
 //    public void onEvent(NotificationClickEvent event) {
