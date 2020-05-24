@@ -1,6 +1,7 @@
 package com.wd.patient.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -42,6 +43,10 @@ public class KeLieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         mList = list;
         notifyDataSetChanged();
     }
+    private int text;
+    public void setTextChange(int b) {
+        text = b;
+    }
 
     @NonNull
     @Override
@@ -52,6 +57,12 @@ public class KeLieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
+        if (text == mList.get(i).getId()) {
+            ((ViewHolder) viewHolder).name.setTextColor(Color.BLUE);
+        } else {
+            ((ViewHolder) viewHolder).name.setTextColor(Color.GRAY);
+        }
+
         ((ViewHolder) viewHolder).name.setText(mList.get(i).getDepartmentName());
         ((ViewHolder)viewHolder).bei.setOnClickListener(new View.OnClickListener() {
             @Override

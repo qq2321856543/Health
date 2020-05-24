@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.wd.patient.R;
 import com.wd.patient.R2;
 import com.wd.patient.bean.BingYouQuanBean;
+import com.wd.patient.bean.SearchBean;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,17 +29,17 @@ import butterknife.ButterKnife;
  * @Author: 李聪聪
  * @CreateDate: 2020/5/21 22:59
  */
-public class ButtonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     private Context mContext;
-    private List<BingYouQuanBean.ResultBean> mList = new ArrayList<>();
+    private List<SearchBean.ResultBean> mList = new ArrayList<>();
 
-    public ButtonAdapter(Context context) {
+    public SearchAdapter(Context context) {
         mContext = context;
     }
 
-    public void setData(List<BingYouQuanBean.ResultBean> list) {
+    public void setData(List<SearchBean.ResultBean> list) {
         mList = list;
         notifyDataSetChanged();
     }
