@@ -1,9 +1,15 @@
 package com.wd.inquiry.activity;
 
+import android.annotation.TargetApi;
+import android.graphics.Rect;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +18,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.AbstractDraweeController;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.wd.common.base.util.Base.BaseAcitvity;
 import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.inquiry.R;
@@ -47,7 +57,7 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_ConsultDoctor
 
     @BindView(R2.id.rv)
     RecyclerView rv;
-    private Button bt_fasong;
+    private ImageView iv_fasong;
     private ImageView iv_back;
     private TextView tv_name;
     String name1="zhengha123";
@@ -56,6 +66,7 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_ConsultDoctor
     String pwd2="666666";
     private EditText et;
     private MessageAdapter messageAdapter;
+    Boolean is=false;
 
     @Override
     protected BasePresenter initPresenter() {
@@ -70,7 +81,7 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_ConsultDoctor
     @Override
     protected void initView() {
         et = findViewById(R.id.et);
-        bt_fasong = findViewById(R.id.bt_fasong);
+        iv_fasong = findViewById(R.id.iv_fasong);
         iv_back = findViewById(R.id.iv_back);
         tv_name = findViewById(R.id.tv_name);
 
@@ -83,10 +94,14 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_ConsultDoctor
     @Override
     protected void initData() {
         int id = getIntent().getIntExtra("id", 0);
+        String doctorname = getIntent().getStringExtra("doctorname");
+        //控件赋值
+        tv_name.setText(doctorname);
         BasePresenter presenter = getPresenter();
         if (presenter != null) {
             ((ICoolor_ConsultDoctor.IPresenter)presenter).getConsultDoctor(id);
         }
+        //设置用户名
 
         //JMessageClient.registerEventReceiver(this);
         iv_back.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +121,7 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_ConsultDoctor
 //            }
 //        });
 
-        bt_fasong.setOnClickListener(new View.OnClickListener() {
+        iv_fasong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(SpeakActivity.this, "发送...", Toast.LENGTH_SHORT).show();
@@ -121,7 +136,17 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_ConsultDoctor
                 messageAdapter.setData(list);
             }
         });
-
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                /**
+                 * 此处执行任务
+                 * */
+                mHanlder.sendEmptyMessage(1);
+                mHanlder.postDelayed(this, 1 * 1000);//延迟5秒,再次执行task本身,实现了循环的效果
+            }
+        };
+        mHanlder.postDelayed(task, 500);//第一次调用,延迟1秒执行task
     }
     public void sendMess(String name,String str){
                 //创建跨应用会话
@@ -163,6 +188,51 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_ConsultDoctor
 
     }
 
+    private boolean isInputMethodShowing() {
+        //获取当前屏幕内容的高度
+        int screenHeight = getWindow().getDecorView().getHeight();
+        //获取View可见区域的bottom
+        Rect rect = new Rect();
+        getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+
+        return screenHeight - rect.bottom - getSoftButtonsBarHeight() != 0;
+    }
+
+    /**
+     * 底部虚拟按键栏的高度
+     * @return
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private int getSoftButtonsBarHeight() {
+        DisplayMetrics metrics = new DisplayMetrics();
+        //这个方法获取可能不是真实屏幕的高度
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int usableHeight = metrics.heightPixels;
+        //获取当前屏幕的真实高度
+        getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
+        int realHeight = metrics.heightPixels;
+        if (realHeight > usableHeight) {
+            return realHeight - usableHeight;
+        } else {
+            return 0;
+        }
+    }
+    private Handler mHanlder = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            switch (msg.what) {
+                case 1:
+                    boolean inputMethodShowing = isInputMethodShowing();
+                    if (inputMethodShowing){
+                        rv.scrollToPosition(list.size()-1);//滚动到指定位置
+                    }
+                    break;
+                default:
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    };
     @Override
     protected void onResume() {
         super.onResume();

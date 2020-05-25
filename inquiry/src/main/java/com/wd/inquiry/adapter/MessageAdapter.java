@@ -1,6 +1,7 @@
 package com.wd.inquiry.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.wd.common.base.util.util.SPUtils;
 import com.wd.inquiry.R;
 import com.wd.inquiry.bean.MessageBean;
 
@@ -48,6 +51,8 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((ViewHolder)viewHolder).tv.setText(list.get(i).getCloseMessage());
         }else {
             ((ViewHolder)viewHolder).tv.setText(list.get(i).getSendMessage());
+            String head = SPUtils.getString(context, SPUtils.USERINFO_NAME, "head");
+            ((ViewHolder)viewHolder).iv.setImageURI(Uri.parse(head));
         }
     }
 
@@ -65,7 +70,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private final TextView tv;
-        private final ImageView iv;
+        private final SimpleDraweeView iv;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

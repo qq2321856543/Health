@@ -132,6 +132,7 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
                     if (list.getIs()){
                         Intent intent = new Intent(getContext(), SpeakActivity.class);
                         intent.putExtra("id",list.getDoctorId());
+                        intent.putExtra("doctorname",list.getDoctorName());
                         startActivity(intent);
                         getActivity().overridePendingTransition(R.anim.translate,R.anim.translateleft);
                     }

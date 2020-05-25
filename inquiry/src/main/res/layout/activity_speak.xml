@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="#F1F1F1"
     android:layout_height="match_parent"
     tools:context=".activity.SpeakActivity">
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="#FDFDFE"
         android:layout_height="60dp">
         <ImageView
             android:id="@+id/iv_back"
@@ -25,27 +27,60 @@
             android:textStyle="bold"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_marginTop="4dp"
+        android:layout_width="match_parent"
+        android:background="#FDFDFE"
+        android:layout_height="match_parent">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"
+        android:background="#FDFDFE"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp">
+        android:layout_height="wrap_content">
 
     </android.support.v7.widget.RecyclerView>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
+        android:background="#E3E6E7"
+        android:layout_alignParentBottom="true"
         android:layout_height="50dp">
+        <ImageView
+            android:id="@+id/iv_yuyin"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/common_icon_voice_n"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
         <EditText
             android:id="@+id/et"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/inquiry_yuan1"/>
-        <Button
-            android:id="@+id/bt_fasong"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:text="发送"/>
-    </LinearLayout>
+            android:layout_width="250dp"
+            android:layout_height="36dp"
+            android:layout_toRightOf="@id/iv_yuyin"
+            android:background="@drawable/wx"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="6dp"
+            android:layout_marginRight="10dp"/>
+        <ImageView
+            android:id="@+id/iv_biaoqing"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/common_icon_expression_n"
+            android:layout_toRightOf="@id/et"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentBottom="true"/>
+        <ImageView
+            android:id="@+id/iv_fasong"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/common_icon_send_n"
+            android:layout_toRightOf="@id/iv_biaoqing"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"/>
+    </RelativeLayout>
+    </RelativeLayout>
+
 </LinearLayout>
