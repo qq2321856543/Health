@@ -3,6 +3,7 @@ package com.wd.home.presenter;
 import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.common.base.util.Base.IBaseView;
 import com.wd.home.bean.HomeBannerBean;
+import com.wd.home.bean.HomeDetailBean;
 import com.wd.home.bean.HomeFindListBean;
 import com.wd.home.bean.HomePlateListBean;
 import com.wd.home.bean.HomeSearchBean;
@@ -78,6 +79,20 @@ public class HomePresenter extends BasePresenter implements IHomeContract.IPrese
                 if(view instanceof IHomeContract.IView){
                     IHomeContract.IView iView= (IHomeContract.IView) view;
                     iView.onFindList(homeFindListBean);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getDetail(int infoId) {
+        model.onGetDetail(infoId, new IHomeContract.IModel.IDetailCallBack() {
+            @Override
+            public void onDetail(HomeDetailBean homeDetailBean) {
+                IBaseView view = getView();
+                if(view instanceof IHomeContract.IView){
+                    IHomeContract.IView iView= (IHomeContract.IView) view;
+                    iView.onDetail(homeDetailBean);
                 }
             }
         });

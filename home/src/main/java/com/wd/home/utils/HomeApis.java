@@ -1,6 +1,7 @@
 package com.wd.home.utils;
 
 import com.wd.home.bean.HomeBannerBean;
+import com.wd.home.bean.HomeDetailBean;
 import com.wd.home.bean.HomeFindListBean;
 import com.wd.home.bean.HomePlateListBean;
 import com.wd.home.bean.HomeSearchBean;
@@ -23,4 +24,6 @@ public interface HomeApis {
     Observable<HomePlateListBean>getHomePlateList();
     @GET("health/share/information/v1/findInformationList")
     Observable<HomeFindListBean>getHomeList(@Query("plateId")int plateId,@Query("page")int page,@Query("count")int count);
+    @GET("health/share/information/v1/findInformation")
+    Observable<HomeDetailBean>getHomeDetail(@Query("infoId")int infoId);
 }

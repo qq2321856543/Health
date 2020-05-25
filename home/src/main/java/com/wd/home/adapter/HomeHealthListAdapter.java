@@ -61,7 +61,7 @@ public class HomeHealthListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         String title = bean.getTitle();
         String source = bean.getSource();
         String img = bean.getThumbnail();
-
+        int id = bean.getId();
         Uri uri = Uri.parse(img);
         Date date = new Date(releaseTime);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -70,6 +70,13 @@ public class HomeHealthListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         ((ViewHolder)viewHolder).name.setText(title);
         ((ViewHolder)viewHolder).author.setText(source);
         ((ViewHolder)viewHolder).time.setText(format);
+        ((ViewHolder)viewHolder).iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                monClick.setClick(id,img);
+
+            }
+        });
     }
 
     @Override
@@ -88,7 +95,13 @@ public class HomeHealthListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public int getItemCount() {
         return list.size();
     }
-
+    private onClick monClick;
+    public interface onClick{
+        void setClick(int id,String img);
+    }
+    public void Click(onClick onClick){
+        monClick=onClick;
+    }
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R2.id.iv_home_item)
         SimpleDraweeView iv;

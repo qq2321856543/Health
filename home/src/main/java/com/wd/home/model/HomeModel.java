@@ -2,6 +2,7 @@ package com.wd.home.model;
 
 import com.wd.common.base.util.util.RetrofitUtil;
 import com.wd.home.bean.HomeBannerBean;
+import com.wd.home.bean.HomeDetailBean;
 import com.wd.home.bean.HomeFindListBean;
 import com.wd.home.bean.HomePlateListBean;
 import com.wd.home.bean.HomeSearchBean;
@@ -127,6 +128,36 @@ public class HomeModel implements IHomeContract.IModel {
                     public void onNext(HomeFindListBean homeFindListBean) {
                         if(iFindListCallBack!=null){
                             iFindListCallBack.onFindList(homeFindListBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void onGetDetail(int infoId, IDetailCallBack iDetailCallBack) {
+        createrRetrofit().getHomeDetail(infoId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<HomeDetailBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(HomeDetailBean homeDetailBean) {
+                        if(iDetailCallBack!=null){
+                            iDetailCallBack.onDetail(homeDetailBean);
                         }
                     }
 

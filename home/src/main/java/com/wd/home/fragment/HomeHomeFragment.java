@@ -1,5 +1,6 @@
 package com.wd.home.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,9 +18,11 @@ import com.wd.common.base.util.Base.BaseFragment;
 import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.home.R;
 import com.wd.home.R2;
+import com.wd.home.activity.HomeInformationActivity;
 import com.wd.home.adapter.HomeHealthListAdapter;
 import com.wd.home.adapter.HomeHealthTitleAdapter;
 import com.wd.home.bean.HomeBannerBean;
+import com.wd.home.bean.HomeDetailBean;
 import com.wd.home.bean.HomeFindListBean;
 import com.wd.home.bean.HomePlateListBean;
 import com.wd.home.bean.HomeSearchBean;
@@ -127,6 +130,20 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
         HomeHealthListAdapter adapter = new HomeHealthListAdapter(getActivity(), list);
         rvHomeHealth.setLayoutManager(manager);
         rvHomeHealth.setAdapter(adapter);
+        adapter.Click(new HomeHealthListAdapter.onClick() {
+            @Override
+            public void setClick(int id, String img) {
+                Intent intent = new Intent(getActivity(), HomeInformationActivity.class);
+                intent.putExtra("id",id);
+                intent.putExtra("img",img);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onDetail(HomeDetailBean homeDetailBean) {
+
     }
 
     @Override
