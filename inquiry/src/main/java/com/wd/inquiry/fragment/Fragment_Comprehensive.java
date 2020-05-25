@@ -14,6 +14,7 @@ import com.wd.common.base.util.Base.BaseFragment;
 import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.inquiry.R;
 import com.wd.inquiry.R2;
+import com.wd.inquiry.activity.DoctorInfoActivity;
 import com.wd.inquiry.activity.SpeakActivity;
 import com.wd.inquiry.adapter.DoctorListAdapter;
 import com.wd.inquiry.bean.DoctorListBean;
@@ -69,10 +70,12 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
 
     @Override
     protected void initData() {
+
         BasePresenter presenter = getPresenter();
         if (presenter != null) {
             ((ICoolor_DoctorList.IPresenter)presenter).getDoctorList(7,1,0,1,10);
         }
+
 
     }
 
@@ -125,7 +128,7 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
             }
 
         });
-        iv_max.setOnClickListener(new View.OnClickListener() {
+        bt_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for (DoctorListBean.ResultBean list:result){
@@ -135,6 +138,19 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
                         intent.putExtra("doctorname",list.getDoctorName());
                         startActivity(intent);
                         getActivity().overridePendingTransition(R.anim.translate,R.anim.translateleft);
+                    }
+                }
+
+            }
+        });
+        iv_xiangqing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (DoctorListBean.ResultBean list:result){
+                    if (list.getIs()){
+                        Intent intent = new Intent(getActivity(), DoctorInfoActivity.class);
+                        intent.putExtra("id",list.getDoctorId());
+                        startActivity(intent);
                     }
                 }
 
@@ -162,4 +178,6 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
         super.onPause();
         EventBus.getDefault().unregister(this);
     }
+
+
 }
