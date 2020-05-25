@@ -85,14 +85,11 @@ public class LoginRegisterActivity extends BaseAcitvity implements ILoginContrac
             }
         });
         btRegister.setOnClickListener(new View.OnClickListener() {
-
             private String pwd;
-
             @Override
             public void onClick(View v) {
                 Boolean net = RetrofitUtil.getInstance().isWifi(LoginRegisterActivity.this);
                 if(net){
-
                     String email = etRegisterEmail.getText().toString();
                     String pwdOne = etRegisterPwd.getText().toString();
                     String pwdTwo = etRegisterPwdAgain.getText().toString();
