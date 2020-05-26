@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.PatientSearchActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_height="@dimen/dp_63">
+        <ImageView
+            android:layout_width="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_23"
+            android:src="@mipmap/zuo"
+            android:id="@+id/patient_activity_back"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_height="@dimen/dp_16"/>
+        <EditText
+            android:background="@drawable/sou_bian"
+            android:layout_width="wrap_content"
+            android:paddingLeft="12dp"
+            android:id="@+id/search_et"
+            android:hint="请输入病状关键字"
+            android:textSize="12sp"
+            android:layout_marginTop="@dimen/dp_13"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_weight="1"
+            android:layout_height="@dimen/dp_40"/>
+        <TextView
+            android:layout_marginLeft="10sp"
+            android:layout_width="wrap_content"
+            android:text="搜索"
+            android:id="@+id/search_tx"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_marginTop="15sp"
+            android:textColor="#3087ea"
+            android:textSize="@dimen/sp_16"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#F2F2F2"
+        android:layout_marginTop="3dp"
+        android:layout_height="6dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/patient_activity_imagegone"
+        android:visibility="gone"
+        android:gravity="center_horizontal"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@mipmap/patient_no_search_message"
+            android:id="@+id/patient_activity_notwork"
+            android:layout_marginTop="@dimen/dp_50"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
+            android:textSize="12sp"
+            android:id="@+id/patient_activity_notsearch_tv"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/sou_re"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
