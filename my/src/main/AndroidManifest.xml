@@ -3,9 +3,11 @@
     package="com.wd.my">
 
     <application>
-        <activity android:name=".activity.MyMyMainActivity">
-
-        </activity>
+        <activity android:name=".activity.MyMyMainActivity"></activity>
+        <activity android:name=".activity.CurrentConsultationActivity"></activity>
+        <activity android:name=".activity.HistoryConsultationActivity"></activity>
+        <activity android:name=".activity.SetActivity"></activity>
+        <activity android:name=".activity.UserInfoActivity"></activity>
     </application>
 
 </manifest>

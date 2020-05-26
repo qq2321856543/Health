@@ -58,6 +58,15 @@ public class DoctorListBean {
         private int praiseNum;
         private int serverNum;
         private int servicePrice;
+        Boolean is=false;
+
+        public Boolean getIs() {
+            return is;
+        }
+
+        public void setIs(Boolean is) {
+            this.is = is;
+        }
 
         public int getBadNum() {
             return badNum;
