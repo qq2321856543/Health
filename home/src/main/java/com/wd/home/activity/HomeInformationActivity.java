@@ -13,7 +13,13 @@ import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.home.R;
 import com.wd.home.R2;
 import com.wd.home.bean.HomeBannerBean;
+import com.wd.home.bean.HomeDepartmentBean;
 import com.wd.home.bean.HomeDetailBean;
+import com.wd.home.bean.HomeDiseaseDetailBean;
+import com.wd.home.bean.HomeDrugsDetailBean;
+import com.wd.home.bean.HomeDrugsKnowledgeBean;
+import com.wd.home.bean.HomeFindDiseaseBean;
+import com.wd.home.bean.HomeFindDrugsCategoryBean;
 import com.wd.home.bean.HomeFindListBean;
 import com.wd.home.bean.HomePlateListBean;
 import com.wd.home.bean.HomeSearchBean;
@@ -90,6 +96,37 @@ public class HomeInformationActivity extends BaseAcitvity implements IHomeContra
         Uri uri = Uri.parse(img);
         iv.setImageURI(uri);
     }
+
+    @Override
+    public void onHomeDepartment(HomeDepartmentBean homeDepartmentBean) {
+
+    }
+
+    @Override
+    public void onFindDisease(HomeFindDiseaseBean homeFindDiseaseBean) {
+
+    }
+
+    @Override
+    public void onHomeDiseaseDetail(HomeDiseaseDetailBean homeDiseaseDetailBean) {
+
+    }
+
+    @Override
+    public void onHomeDrugsCategory(HomeFindDrugsCategoryBean homeFindDrugsCategoryBean) {
+
+    }
+
+    @Override
+    public void onHomeDrugsKnowledge(HomeDrugsKnowledgeBean homeDrugsKnowledgeBean) {
+
+    }
+
+    @Override
+    public void onHomeDrugsDetail(HomeDrugsDetailBean homeDrugsDetailBean) {
+
+    }
+
     @Override
     public void onBanner(HomeBannerBean homeBannerBean) {
 
