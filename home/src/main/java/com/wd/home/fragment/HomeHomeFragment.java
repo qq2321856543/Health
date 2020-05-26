@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.stx.xhb.xbanner.XBanner;
@@ -80,7 +81,12 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
             ((IHomeContract.IPresenter) presenter).getPlateList();
             (( IHomeContract.IPresenter)presenter).getFindList(1,1,5);
         }
-
+        ivHomeHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ARouter.getInstance().build("/my/MyMyMainActivity").navigation();
+            }
+        });
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,8 +13,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.wd.common.base.util.Base.BaseAcitvity;
 import com.wd.common.base.util.Base.BasePresenter;
+import com.wd.common.base.util.util.MD;
 import com.wd.common.base.util.util.RetrofitUtil;
 import com.wd.common.base.util.util.RsaCoder;
 import com.wd.common.base.util.util.SPUtils;
@@ -33,6 +36,8 @@ import java.util.regex.Pattern;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.api.BasicCallback;
 
 import static java.util.regex.Pattern.compile;
 
@@ -68,6 +73,7 @@ public class LoginLonginActivity extends BaseAcitvity implements ILoginContract.
     TextView tvOrther;
     @BindView(R2.id.iv_login_wechat)
     ImageView ivLoginWechat;
+    private String s;
 
     @Override
     protected BasePresenter initPresenter() {
@@ -143,6 +149,7 @@ public class LoginLonginActivity extends BaseAcitvity implements ILoginContract.
     public void onLogin(LoginLoginBean loginLoginBean) {
         String message = loginLoginBean.getMessage();
         Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
+
         if(message.equals("登录成功")){
             LoginLoginBean.ResultBean result = loginLoginBean.getResult();
             int id = result.getId();
@@ -155,6 +162,26 @@ public class LoginLonginActivity extends BaseAcitvity implements ILoginContract.
             SPUtils.putString(this,SPUtils.USERINFO_NAME,"name",name);
 
 //            new Intent(LoginLonginActivity.this,)
+            //极光IM密码公钥解密
+            try {
+                s = RsaCoder.decryptByPublicKey(result.getJiGuangPwd());
+            } catch (Exception e) {
+                e.printStackTrace();
+             }
+            Log.i("xxx","极光IM帐号，帐号："+result.getUserName()+";密码："+result.getJiGuangPwd()+";解密后的密码:"+s+";MD5加密后的密码:"+MD.MD5(s));
+            //极光IM密码MD5加密 并登录
+            JMessageClient.login(result.getUserName(), "123456", new BasicCallback() {
+                @Override
+                public void gotResult(int i, String s) {
+                    if (i==0){
+                        Log.i("xxx","极光IM登录成功");
+                    }else {
+                        Log.i("xxx","极光IM登录失败："+i+"///"+s);
+                    }
+                }
+            });
+            //跳转HomeFragmentActivity
+            ARouter.getInstance().build("/home/HomeFragmentActivity").navigation();
         }
     }
 

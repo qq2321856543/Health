@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.wd.common.base.util.Base.BaseAcitvity;
 import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.home.R;
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
+@Route(path = "/home/HomeFragmentActivity")
 public class HomeFragmentActivity extends BaseAcitvity {
 
 
@@ -42,6 +44,7 @@ public class HomeFragmentActivity extends BaseAcitvity {
 
     @Override
     protected void initView() {
+        ARouter.getInstance().inject(this);
         data.add("首页");
         data.add("病友圈");
         data.add("小视频");

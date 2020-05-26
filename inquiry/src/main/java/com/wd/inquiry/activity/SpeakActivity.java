@@ -112,14 +112,14 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_ConsultDoctor
             }
         });
         //获取用户信息
-//        JMessageClient.getUserInfo("acZ0Uy767986297", "c7f6a1d56cb8da740fd18bfa", new GetUserInfoCallback() {
-//            @Override
-//            public void gotResult(int responseCode, String responseMessage, UserInfo info) {
-//                Toast.makeText(SpeakActivity.this, "sdf"+responseMessage, Toast.LENGTH_SHORT).show();
-//                Log.i("xxx","getUserInfo："+responseMessage+info.getAppKey()+info.getUserName());
-//
-//            }
-//        });
+        JMessageClient.getUserInfo("acZ0Uy767986297", "c7f6a1d56cb8da740fd18bfa", new GetUserInfoCallback() {
+            @Override
+            public void gotResult(int responseCode, String responseMessage, UserInfo info) {
+                Toast.makeText(SpeakActivity.this, "sdf"+responseMessage, Toast.LENGTH_SHORT).show();
+                Log.i("xxx","getUserInfo："+responseMessage+info.getAppKey()+info.getUserName());
+
+            }
+        });
 
         iv_fasong.setOnClickListener(new View.OnClickListener() {
             @Override

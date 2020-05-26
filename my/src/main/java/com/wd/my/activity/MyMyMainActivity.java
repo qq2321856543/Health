@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.wd.common.base.util.Base.BaseAcitvity;
 import com.wd.common.base.util.Base.BasePresenter;
@@ -29,7 +31,7 @@ import java.util.HashSet;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-
+@Route(path = "/my/MyMyMainActivity")
 public class MyMyMainActivity extends BaseAcitvity implements GetUserInfoContract.IView {
     @BindView(R2.id.iv_mine_back)
     ImageView        ivMineBack;
@@ -77,6 +79,7 @@ public class MyMyMainActivity extends BaseAcitvity implements GetUserInfoContrac
 
     @Override
     protected void initView() {
+        ARouter.getInstance().inject(this);
         //设置透明度
         layoutMineAlpha.getBackground().setAlpha(90);
         //请求
