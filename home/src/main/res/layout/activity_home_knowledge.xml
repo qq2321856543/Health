@@ -48,5 +48,6 @@
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_below="@id/ll2"
+        android:id="@+id/vp_knowledge"
         android:layout_height="wrap_content"></android.support.v4.view.ViewPager>
 </RelativeLayout>

@@ -154,7 +154,7 @@ public class LoginLonginActivity extends BaseAcitvity implements ILoginContract.
             SPUtils.putString(this,SPUtils.USERINFO_NAME,"head",headPic);
             SPUtils.putString(this,SPUtils.USERINFO_NAME,"name",name);
 
-//            new Intent(LoginLonginActivity.this,)
+          //  new Intent(LoginLonginActivity.this,)
         }
     }
 
