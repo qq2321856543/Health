@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.wd.inquiry.R;
 import com.wd.inquiry.bean.FindDepartmentBean;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 public class FindDepartmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -35,7 +37,7 @@ public class FindDepartmentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         ((ViewHolder)viewHolder).tv_name.setText(list.get(i).getDepartmentName());
         if (list.get(i).getIs()){
             ((ViewHolder)viewHolder).tv_name.setTextColor(0xff408FEB);
-
+            EventBus.getDefault().postSticky(list.get(i).getId());
         }else {
             ((ViewHolder)viewHolder).tv_name.setTextColor(0xffC3C3C3);
 
@@ -46,6 +48,7 @@ public class FindDepartmentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 monclick.click(list.get(i).getId(),i);
             }
         });
+
     }
 
     public void setOnclick(Onclick onclick){

@@ -101,7 +101,7 @@ public class MyMyMainActivity extends BaseAcitvity implements GetUserInfoContrac
     public void onViewClicked(View view) {
         Intent intent = new Intent();
         if (view.getId() == R.id.iv_mine_back) {
-            Toast.makeText(this, "返回", Toast.LENGTH_SHORT).show();
+            finish();
         }else if(view.getId() == R.id.iv_mine_notice) {
 
         }else if(view.getId() == R.id.iv_mine_notice) {

@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.wd.common.base.util.Base.BaseAcitvity;
@@ -50,6 +51,7 @@ public class InquiryMainActivity extends BaseAcitvity implements ICoolor_FindDep
     ViewPager vp;
     ArrayList<Fragment> list = new ArrayList<>();
     ArrayList<String> tabs = new ArrayList<>();
+    private int id;
 
     @Override
     protected BasePresenter initPresenter() {
@@ -63,7 +65,7 @@ public class InquiryMainActivity extends BaseAcitvity implements ICoolor_FindDep
 
     @Override
     protected void initView() {
-
+        id = getIntent().getIntExtra("id", 0);
     }
 
     @Override
@@ -89,7 +91,12 @@ public class InquiryMainActivity extends BaseAcitvity implements ICoolor_FindDep
     @Override
     public void getFindDepartmentSuccess(FindDepartmentBean findDepartmentBean) {
         List<FindDepartmentBean.ResultBean> result = findDepartmentBean.getResult();
-        result.get(0).setIs(true);
+        for (FindDepartmentBean.ResultBean resultBean:result){
+            if (resultBean.getId()==id){
+                resultBean.setIs(true);
+            }
+        }
+       // result.get(0).setIs(true);
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
         rv.setLayoutManager(layoutManager);
         FindDepartmentAdapter findDepartmentAdapter = new FindDepartmentAdapter(this, result);
@@ -103,7 +110,7 @@ public class InquiryMainActivity extends BaseAcitvity implements ICoolor_FindDep
                 }
                 result.get(postion).setIs(true);
                 findDepartmentAdapter.notifyDataSetChanged();
-                EventBus.getDefault().postSticky(id);
+
             }
         });
     }
