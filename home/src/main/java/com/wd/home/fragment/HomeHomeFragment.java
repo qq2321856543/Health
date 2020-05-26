@@ -117,6 +117,12 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
         String head = SPUtils.getString(getActivity(), SPUtils.USERINFO_NAME, "head");
         Uri uri = Uri.parse(head);
         ivHomeHead.setImageURI(uri);
+        ivHomeHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ARouter.getInstance().build("/my/MyMyMainActivity").navigation();
+            }
+        });
     }
 
     @Override
