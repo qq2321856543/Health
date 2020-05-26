@@ -3,12 +3,14 @@ package com.wd.home.fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -73,7 +75,6 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
     @BindView(R2.id.iv_home_drug)
     ImageView ivHomeDrug;
 
-
     @Override
     protected BasePresenter initPresenter() {
         return new HomePresenter(this);
@@ -81,6 +82,7 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
 
     @Override
     protected int getLayout() {
+
         return R.layout.fragment_home;
     }
 
@@ -110,7 +112,7 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), HomeKnowledgeActivity.class);
-                intent.putExtra("page",1);
+                intent.putExtra("page",0);
                 startActivity(intent);
             }
         });
@@ -232,10 +234,14 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
+
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
         return rootView;
     }
+
+
+
 
     @Override
     public void onDestroyView() {
