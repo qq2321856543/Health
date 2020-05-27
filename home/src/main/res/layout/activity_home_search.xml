@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FDFDFE"
+    tools:context=".activity.HomeSearchActivity">
+
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@mipmap/home_black"
+        android:layout_marginTop="28dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/iv_home_serach_back"/>
+
+    <EditText
+        android:layout_width="280dp"
+        android:hint="面神经炎"
+        android:paddingLeft="20dp"
+        android:textSize="12sp"
+        android:layout_height="32dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/home_et_search_white"
+        android:layout_marginTop="20dp"
+        android:id="@+id/et_home_serach"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="搜索"
+        android:textSize="14sp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/tv_home_serach"
+        android:textColor="#3087ea"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/v"
+        android:background="#F1F1F1"
+        android:layout_below="@id/et_home_serach"></View>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@id/v"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/rl_history"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="搜索历史"
+                android:id="@+id/tv_history"
+                android:textSize="14sp"
+                android:textColor="#3087ea"
+                android:layout_height="wrap_content" />
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/rv_history"
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/tv_history"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="40dp"
+            android:layout_below="@id/rl_history"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="热门搜索"
+                android:id="@+id/tv_hot"
+                android:textSize="14sp"
+                android:textColor="#3087ea"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -3,12 +3,14 @@
     package="com.wd.inquiry">
 
     <application>
+        <activity android:name=".activity.DoctorInfoActivity"></activity>
+        <activity android:name=".activity.SpeakActivity" />
         <activity android:name=".activity.InquiryMainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
     </application>
 

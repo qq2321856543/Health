@@ -149,8 +149,10 @@ public class PatientHomePageFragment extends BaseFragment implements PatientCont
 
     @Override
     public void onPatientSuccess(BingYouQuanBean bingYouQuanBean) {
+        String message = bingYouQuanBean.getMessage();
+        Log.i("jjj",""+message);
         if (bingYouQuanBean != null) {
-            buttonAdapter.setData(bingYouQuanBean.getResult());
+            //buttonAdapter.setData(bingYouQuanBean.getResult());
         }
     }
 
@@ -172,7 +174,7 @@ public class PatientHomePageFragment extends BaseFragment implements PatientCont
     @Override
     public void onKeLieSuccess(KeLieBean keLieBean) {
         if (keLieBean != null) {
-            keLieAdapter.setData(keLieBean.getResult());
+            //keLieAdapter.setData(keLieBean.getResult());
         }
     }
 

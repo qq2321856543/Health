@@ -39,6 +39,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:hint="@string/login_register_et_email"
+                android:inputType="textEmailAddress"
                 android:paddingBottom="10dp"
                 android:id="@+id/et_register_email"
                 android:background="@null"
@@ -113,6 +114,7 @@
                 android:layout_width="wrap_content"
                 android:hint="@string/login_register_et_pwd"
                 android:paddingBottom="10dp"
+                android:inputType="textPassword"
                 android:id="@+id/et_register_pwd"
                 android:background="@null"
                 android:layout_marginTop="2dp"
@@ -150,6 +152,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:hint="@string/login_register_et_pwd_agin"
+                android:inputType="textPassword"
                 android:paddingBottom="10dp"
                 android:id="@+id/et_register_pwd_again"
                 android:background="@null"
@@ -187,7 +190,7 @@
                 android:src="@mipmap/login_invitatiion_code"/>
             <EditText
                 android:layout_width="wrap_content"
-                android:hint="@string/login_register_et_pwd_agin"
+                android:hint="@string/login_register_et_invitation"
                 android:paddingBottom="10dp"
                 android:id="@+id/et_register_invitatiion"
                 android:background="@null"
