@@ -39,7 +39,7 @@ public class PatientModel implements PatientContract.IModel {
 
                     @Override
                     public void onError(Throwable e) {
-
+                            e.printStackTrace();
                     }
 
                     @Override

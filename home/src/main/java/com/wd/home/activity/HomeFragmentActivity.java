@@ -17,6 +17,7 @@ import com.wd.home.R2;
 import com.wd.home.fragment.HomeHomeFragment;
 import com.wd.home.fragment.TestFragment;
 import com.wd.home.fragment.TestFragment2;
+import com.wd.patient.fragment.PatientHomePageFragment;
 
 import java.util.ArrayList;
 
@@ -49,10 +50,11 @@ public class HomeFragmentActivity extends BaseAcitvity {
         data.add("病友圈");
         data.add("小视频");
         HomeHomeFragment homeHomeFragment = new HomeHomeFragment();
-        TestFragment testFragment = new TestFragment();
+        PatientHomePageFragment patientHomePageFragment = new PatientHomePageFragment();
+        //TestFragment testFragment = new TestFragment();
         TestFragment2 fragment2 = new TestFragment2();
         list.add(homeHomeFragment);
-        list.add(testFragment);
+        list.add(patientHomePageFragment);
         list.add(fragment2);
         tbHome.addTab(tbHome.newTab().setText(data.get(0)));
         tbHome.addTab(tbHome.newTab().setText(data.get(1)));

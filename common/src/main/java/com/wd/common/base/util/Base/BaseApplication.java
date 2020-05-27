@@ -61,13 +61,13 @@ public class BaseApplication extends Application {
 //        Log.i("xxx","md5:"+md5);
 
         //登录
-        JMessageClient.login(name1, pwd1, new BasicCallback() {
-            @Override
-            public void gotResult(int i, String s) {
-                Log.i("xxx",""+i+"///"+s);
-
-            }
-        });
+//        JMessageClient.login(name1, pwd1, new BasicCallback() {
+//            @Override
+//            public void gotResult(int i, String s) {
+//                Log.i("xxx",""+i+"///"+s);
+//
+//            }
+//        });
     }
     public static Context getContext(){
         return context;

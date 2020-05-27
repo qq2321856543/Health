@@ -39,7 +39,9 @@ public class ButtonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public void setData(List<BingYouQuanBean.ResultBean> list) {
-        mList = list;
+        if (list.size()!=0){
+            mList = list;
+        }
         notifyDataSetChanged();
     }
 
