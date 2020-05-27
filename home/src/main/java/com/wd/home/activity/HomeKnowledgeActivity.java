@@ -1,6 +1,7 @@
 package com.wd.home.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -8,11 +9,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.wd.common.base.util.Base.BaseAcitvity;
 import com.wd.common.base.util.Base.BasePresenter;
+import com.wd.common.base.util.util.SPUtils;
 import com.wd.home.R;
 import com.wd.home.R2;
 import com.wd.home.fragment.HomeDiseasesFragment;
@@ -67,6 +71,15 @@ public class HomeKnowledgeActivity extends BaseAcitvity {
         vp.setCurrentItem(id);
         vp.setAdapter(page);
         tb.setupWithViewPager(vp);
+        String head = SPUtils.getString(this, SPUtils.USERINFO_NAME, "head");
+        Uri uri = Uri.parse(head);
+        ivKnowledgeHead.setImageURI(uri);
+        ivKnowledgeHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ARouter.getInstance().build("/my/MyMyMainActivity").navigation();
+            }
+        });
     }
 
     @Override
