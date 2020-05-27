@@ -170,13 +170,15 @@ public class LoginLonginActivity extends BaseAcitvity implements ILoginContract.
              }
             Log.i("xxx","极光IM帐号，帐号："+result.getUserName()+";密码："+result.getJiGuangPwd()+";解密后的密码:"+s+";MD5加密后的密码:"+MD.MD5(s));
             //极光IM密码MD5加密 并登录
-            JMessageClient.login(result.getUserName(), "123456", new BasicCallback() {
+            JMessageClient.login(result.getUserName(), MD.MD5(s), new BasicCallback() {
                 @Override
                 public void gotResult(int i, String s) {
                     if (i==0){
                         Log.i("xxx","极光IM登录成功");
+                        Toast.makeText(LoginLonginActivity.this, "极光IM登录成功", Toast.LENGTH_SHORT).show();
                     }else {
                         Log.i("xxx","极光IM登录失败："+i+"///"+s);
+                        Toast.makeText(LoginLonginActivity.this, "极光IM登录失败", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
