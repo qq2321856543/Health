@@ -14,7 +14,9 @@ import com.wd.common.base.util.util.SPUtils;
 import com.wd.inquiry.R;
 import com.wd.inquiry.bean.MessageBean;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -48,11 +50,26 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         if (list.get(i).getType()==1){
+
             ((ViewHolder)viewHolder).tv.setText(list.get(i).getCloseMessage());
+            if (list.get(i).getTime()!=null){
+                Date date = new Date(list.get(i).getTime());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String format = dateFormat.format(date);
+                String[] split = format.split("-");
+                ((ViewHolder)viewHolder).tv_shijian.setText(split[0]+"-"+split[1]+"-"+split[2]);
+            }
         }else {
             ((ViewHolder)viewHolder).tv.setText(list.get(i).getSendMessage());
             String head = SPUtils.getString(context, SPUtils.USERINFO_NAME, "head");
             ((ViewHolder)viewHolder).iv.setImageURI(Uri.parse(head));
+            if (list.get(i).getTime()!=null){
+                Date date = new Date(list.get(i).getTime());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String format = dateFormat.format(date);
+                String[] split = format.split("-");
+                ((ViewHolder)viewHolder).tv_shijian.setText(split[0]+"-"+split[1]+"-"+split[2]);
+            }
         }
     }
 
@@ -70,12 +87,14 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private final TextView tv;
+        private final TextView tv_shijian;
         private final SimpleDraweeView iv;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             iv = itemView.findViewById(R.id.iv);
             tv = itemView.findViewById(R.id.tv);
+            tv_shijian = itemView.findViewById(R.id.tv_shijian);
         }
     }
 }

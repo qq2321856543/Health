@@ -24,13 +24,19 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.wd.common.base.util.Base.BaseAcitvity;
 import com.wd.common.base.util.Base.BasePresenter;
+import com.wd.common.base.util.util.RsaCoder;
 import com.wd.inquiry.R;
 import com.wd.inquiry.R2;
 import com.wd.inquiry.adapter.MessageAdapter;
 import com.wd.inquiry.bean.ConsultDoctorBean;
+import com.wd.inquiry.bean.CurrentInquiryRecordBean;
+import com.wd.inquiry.bean.InquiryRecordListBean;
 import com.wd.inquiry.bean.MessageBean;
+import com.wd.inquiry.bean.PushMessageBean;
 import com.wd.inquiry.icoolor.ICoolor_ConsultDoctor;
+import com.wd.inquiry.icoolor.ICoolor_Message;
 import com.wd.inquiry.presenter.Presenter_ConsultDoctor;
+import com.wd.inquiry.presenter.Presenter_Message;
 import com.wd.inquiry.view.Edittext;
 
 import org.greenrobot.eventbus.EventBus;
@@ -38,6 +44,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -52,7 +59,7 @@ import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.android.api.model.UserInfo;
 import cn.jpush.im.api.BasicCallback;
 
-public class SpeakActivity extends BaseAcitvity implements ICoolor_ConsultDoctor.IView {
+public class SpeakActivity extends BaseAcitvity implements ICoolor_Message.IView {
     ArrayList<MessageBean> list = new ArrayList<>();
 
     @BindView(R2.id.rv)
@@ -67,10 +74,14 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_ConsultDoctor
     private EditText et;
     private MessageAdapter messageAdapter;
     Boolean is=false;
+    private String imname;
+    private int recordId;
+    private int doctorId;
+    MessageBean messageBean = new MessageBean();
 
     @Override
     protected BasePresenter initPresenter() {
-        return new Presenter_ConsultDoctor(this);
+        return new Presenter_Message(this);
     }
 
     @Override
@@ -93,14 +104,27 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_ConsultDoctor
 
     @Override
     protected void initData() {
-        int id = getIntent().getIntExtra("id", 0);
-        String doctorname = getIntent().getStringExtra("doctorname");
-        //控件赋值
-        tv_name.setText(doctorname);
+        //获取当前问诊id
         BasePresenter presenter = getPresenter();
         if (presenter != null) {
-            ((ICoolor_ConsultDoctor.IPresenter)presenter).getConsultDoctor(id);
+            ((ICoolor_Message.IPresenter)presenter).getCurrentInquiryRecord();
         }
+        //获取历史消息
+        MessageList();
+        String userName = getIntent().getStringExtra("UserName");
+        String doctorname = getIntent().getStringExtra("doctorname");
+        try {
+            imname = RsaCoder.decryptByPublicKey(userName);
+            Log.i("ooo",""+imname);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //控件赋值
+        tv_name.setText(doctorname);
+//        BasePresenter presenter = getPresenter();
+//        if (presenter != null) {
+//            ((ICoolor_ConsultDoctor.IPresenter)presenter).getConsultDoctor(id);
+//        }
         //设置用户名
 
         //JMessageClient.registerEventReceiver(this);
@@ -112,23 +136,26 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_ConsultDoctor
             }
         });
         //获取用户信息
-        JMessageClient.getUserInfo("acZ0Uy767986297", "c7f6a1d56cb8da740fd18bfa", new GetUserInfoCallback() {
-            @Override
-            public void gotResult(int responseCode, String responseMessage, UserInfo info) {
-                Toast.makeText(SpeakActivity.this, "sdf"+responseMessage, Toast.LENGTH_SHORT).show();
-                Log.i("xxx","getUserInfo："+responseMessage+info.getAppKey()+info.getUserName());
-
-            }
-        });
+//        JMessageClient.getUserInfo(imname, "b5f102cc307091e167ce52e0", new GetUserInfoCallback() {
+//            @Override
+//            public void gotResult(int responseCode, String responseMessage, UserInfo info) {
+//                Toast.makeText(SpeakActivity.this, "sdf"+responseMessage, Toast.LENGTH_SHORT).show();
+//                Log.i("xxx","getUserInfo："+responseMessage+info.getAppKey()+info.getUserName());
+//
+//            }
+//        });
 
         iv_fasong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SpeakActivity.this, "发送...", Toast.LENGTH_SHORT).show();
+
                 String string = et.getText().toString();
                 et.setText("");
-                sendMess(name2,string);
-                MessageBean messageBean = new MessageBean();
+                sendMess(imname,string);
+                //服务器存储消息
+                if (presenter != null) {
+                    ((ICoolor_Message.IPresenter)presenter).getPushMessage(recordId,string,1,doctorId);
+                }
                 messageBean.setSendMessage(string);
                 messageBean.setCloseMessage("");
                 messageBean.setType(2);
@@ -150,7 +177,7 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_ConsultDoctor
     }
     public void sendMess(String name,String str){
                 //创建跨应用会话
-        Conversation con = Conversation.createSingleConversation(name, "c7f6a1d56cb8da740fd18bfa");
+        Conversation con = Conversation.createSingleConversation(name, "b5f102cc307091e167ce52e0");
         MessageContent content = new TextContent(str);
         //创建一条消息
         Message message = con.createSendMessage(content);
@@ -161,6 +188,7 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_ConsultDoctor
                     Toast.makeText(SpeakActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
                     // 消息发送成功
                 } else {
+                    Log.i("ooo",""+s);
                     Toast.makeText(SpeakActivity.this, "发送失败"+i, Toast.LENGTH_SHORT).show();
 
                     // 消息发送失败
@@ -170,13 +198,23 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_ConsultDoctor
         //发送消息
         JMessageClient.sendMessage(message);
     }
+    public void DoctorInfo(String name){
+        JMessageClient.getUserInfo(name, "b5f102cc307091e167ce52e0", new GetUserInfoCallback() {
+            @Override
+            public void gotResult(int responseCode, String responseMessage, UserInfo info) {
+                Log.i("ooo","getUserInfo："+responseMessage);
+                Log.i("ooo","getUserInfo："+responseMessage+info.getAppKey()+info.getUserName());
 
-
-    @Override
-    public void getConsultDoctorSuccess(ConsultDoctorBean consultDoctorBean) {
-        String doctorUserName = consultDoctorBean.getDoctorUserName();
-
+            }
+        });
     }
+
+
+//    @Override
+//    public void getConsultDoctorSuccess(ConsultDoctorBean consultDoctorBean) {
+//        String doctorUserName = consultDoctorBean.getDoctorUserName();
+//
+//    }
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void getText(String str){
         MessageBean messageBean = new MessageBean();
@@ -245,5 +283,46 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_ConsultDoctor
     protected void onPause() {
         super.onPause();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void getPushMessageSuccess(PushMessageBean pushMessageBean) {
+
+        Toast.makeText(this, ""+pushMessageBean.getMessage(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void getInquiryRecordListSuccess(InquiryRecordListBean inquiryRecordListBean) {
+        List<InquiryRecordListBean.ResultBean> result = inquiryRecordListBean.getResult();
+        for (InquiryRecordListBean.ResultBean resultBean:result){
+            int direction = resultBean.getDirection();
+            String content = resultBean.getContent();
+            if (direction==1){
+                //发送消息
+                messageBean.setSendMessage(content);
+                messageBean.setType(2);
+            }else {
+                //接受消息
+                messageBean.setSendMessage(content);
+                messageBean.setType(1);
+            }
+        }
+        Long askTime = result.get(result.size() - 1).getAskTime();
+        messageBean.setTime(askTime);
+        list.add(messageBean);
+        messageAdapter.setData(list);
+    }
+
+    @Override
+    public void getCurrentInquiryRecordSuccess(CurrentInquiryRecordBean currentInquiryRecordBean) {
+        //问诊id
+        recordId = currentInquiryRecordBean.getResult().getRecordId();
+        doctorId = currentInquiryRecordBean.getResult().getDoctorId();
+    }
+    public void MessageList(){
+        BasePresenter presenter = getPresenter();
+        if (presenter != null) {
+            ((ICoolor_Message.IPresenter)presenter).getCurrentInquiryRecord();
+        }
     }
 }

@@ -2,31 +2,32 @@ package com.wd.inquiry.model;
 
 import com.wd.common.base.util.util.RetrofitUtil;
 import com.wd.inquiry.base.InquiryApis;
-import com.wd.inquiry.bean.ConsultDoctorBean;
 import com.wd.inquiry.bean.CurrentInquiryRecordBean;
-import com.wd.inquiry.bean.DoctorListBean;
-import com.wd.inquiry.icoolor.ICoolor_DoctorList;
+import com.wd.inquiry.bean.InquiryRecordListBean;
+import com.wd.inquiry.bean.PushMessageBean;
+import com.wd.inquiry.icoolor.ICoolor_Message;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class Model_DoctorList implements ICoolor_DoctorList.IModel {
+public class Model_Message implements ICoolor_Message.IModel {
     @Override
-    public void getDoctorList(int deptId, int condition, int sortBy, int page, int count, ICoolor_DoctorList.DoctorListCallback doctorListCallback) {
-        getApis().getDoctorList(deptId,condition,sortBy,page,count)
+    public void getPushMessage(int inquiryId, String content, int type, int doctorId, ICoolor_Message.PushMessageCallback pushMessageCallback) {
+        getApis().getPushMessage(inquiryId,content,type,doctorId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<DoctorListBean>() {
+                .subscribe(new Observer<PushMessageBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(DoctorListBean doctorListBean) {
-                        doctorListCallback.getSuccess(doctorListBean);
+                    public void onNext(PushMessageBean pushMessageBean) {
+                        pushMessageCallback.getSuccess(pushMessageBean);
+
                     }
 
                     @Override
@@ -42,19 +43,20 @@ public class Model_DoctorList implements ICoolor_DoctorList.IModel {
     }
 
     @Override
-    public void getConsultDoctor(int doctorId, ICoolor_DoctorList.ConsultDoctorCallback consultDoctorCallback) {
-        getApis().getConsultDoctor(doctorId)
+    public void getInquiryRecordList(int inquiryId, int page, int count, ICoolor_Message.InquiryRecordListCallback inquiryRecordListCallback) {
+        getApis().getInquiryRecordList(inquiryId,page,count)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ConsultDoctorBean>() {
+                .subscribe(new Observer<InquiryRecordListBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(ConsultDoctorBean consultDoctorBean) {
-                        consultDoctorCallback.getSuccess(consultDoctorBean);
+                    public void onNext(InquiryRecordListBean inquiryRecordListBean) {
+                        inquiryRecordListCallback.getSuccess(inquiryRecordListBean);
+
                     }
 
                     @Override
@@ -70,7 +72,7 @@ public class Model_DoctorList implements ICoolor_DoctorList.IModel {
     }
 
     @Override
-    public void getCurrentInquiryRecord(ICoolor_DoctorList.CurrentInquiryRecorCallback currentInquiryRecorCallback) {
+    public void getCurrentInquiryRecord(ICoolor_Message.CurrentInquiryRecorCallback currentInquiryRecorCallback) {
         getApis().getCurrentInquiryRecord()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

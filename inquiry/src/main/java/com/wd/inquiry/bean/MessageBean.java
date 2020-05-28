@@ -4,6 +4,15 @@ public class MessageBean {
     private String sendMessage;
     private String closeMessage;
     private int type;
+    private Long Time;
+
+    public Long getTime() {
+        return Time;
+    }
+
+    public void setTime(Long time) {
+        Time = time;
+    }
 
     public int getType() {
         return type;

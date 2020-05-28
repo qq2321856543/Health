@@ -199,7 +199,7 @@ public class HomeModel implements IHomeContract.IModel {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        e.printStackTrace();
                     }
 
                     @Override

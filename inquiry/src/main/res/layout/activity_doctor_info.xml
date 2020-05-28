@@ -19,7 +19,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"/>
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tv_xiang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="医生详情"
@@ -49,7 +49,6 @@
             android:text="曾小贤"
             android:layout_toRightOf="@id/iv_touxiang"
             android:layout_alignTop="@id/iv_touxiang"
-            android:layout_marginTop="30dp"
             android:textSize="16sp"
             android:textColor="#333333"
             android:layout_marginLeft="10dp"/>
@@ -206,6 +205,7 @@
             android:layout_below="@id/ll1"
             android:layout_alignLeft="@id/ll1"
             android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:textSize="10sp"
             android:textColor="#333333"
             android:text="饭卡来得及flak时间覅解耦i睡觉哦"/>
@@ -235,6 +235,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/ll2"
+            android:layout_marginLeft="10dp"
             android:layout_alignLeft="@id/ll2"
             android:layout_marginRight="10dp"
             android:textSize="10sp"
@@ -271,24 +272,23 @@
             android:textSize="10sp"
             android:textColor="#333333"
             android:text="（18条评论）"/>
-        <com.jcodecraeer.xrecyclerview.XRecyclerView
-            android:id="@+id/xrv"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/ll3"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp">
             
-        </com.jcodecraeer.xrecyclerview.XRecyclerView>
+        </android.support.v7.widget.RecyclerView>
         <TextView
             android:id="@+id/tv_gengduo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
-            android:layout_below="@id/xrv"
+            android:layout_below="@id/rv"
             android:layout_centerHorizontal="true"
             android:textSize="12sp"
             android:textColor="#3087ea"
-            android:text="点击查看更多评论"
             android:layout_marginTop="20dp"/>
         <LinearLayout
             android:layout_alignParentBottom="true"

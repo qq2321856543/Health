@@ -1,8 +1,12 @@
 package com.wd.inquiry.fragment;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,14 +16,18 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.wd.common.base.util.Base.BaseFragment;
 import com.wd.common.base.util.Base.BasePresenter;
+import com.wd.common.base.util.util.RsaCoder;
 import com.wd.inquiry.R;
 import com.wd.inquiry.R2;
 import com.wd.inquiry.activity.DoctorInfoActivity;
 import com.wd.inquiry.activity.SpeakActivity;
 import com.wd.inquiry.adapter.DoctorListAdapter;
+import com.wd.inquiry.bean.ConsultDoctorBean;
+import com.wd.inquiry.bean.CurrentInquiryRecordBean;
 import com.wd.inquiry.bean.DoctorListBean;
 import com.wd.inquiry.icoolor.ICoolor_DoctorList;
 import com.wd.inquiry.presenter.Presenter_DoctorList;
+import com.wd.inquiry.view.MyDialog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -28,6 +36,9 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 
 import butterknife.BindView;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.callback.GetUserInfoCallback;
+import cn.jpush.im.android.api.model.UserInfo;
 
 public class Fragment_Comprehensive extends BaseFragment implements ICoolor_DoctorList.IView {
     @BindView(R2.id.iv_max)
@@ -51,6 +62,12 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
     ImageView iv_lift;
     @BindView(R2.id.iv_right)
     ImageView iv_right;
+    private List<DoctorListBean.ResultBean> result;
+
+    private AlertDialog.Builder builder;
+    private ProgressDialog progressDialog;
+    private String s;
+
     @Override
     protected BasePresenter initPresenter() {
         return new Presenter_DoctorList(this);
@@ -81,7 +98,7 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
 
     @Override
     public void getDoctorListSuccess(DoctorListBean doctorListBean) {
-        List<DoctorListBean.ResultBean> result = doctorListBean.getResult();
+        result = doctorListBean.getResult();
         if (result.size()==0){
             return;
         }
@@ -111,7 +128,7 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
         doctorListAdapter.OnClick(new DoctorListAdapter.setOnclick() {
             @Override
             public void click(int id) {
-                for (DoctorListBean.ResultBean list:result){
+                for (DoctorListBean.ResultBean list: result){
                     list.setIs(false);
                     if (list.getDoctorId()==id){
                         list.setIs(true);
@@ -131,13 +148,14 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
         bt_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (DoctorListBean.ResultBean list:result){
+                for (DoctorListBean.ResultBean list: result){
                     if (list.getIs()){
-                        Intent intent = new Intent(getContext(), SpeakActivity.class);
-                        intent.putExtra("id",list.getDoctorId());
-                        intent.putExtra("doctorname",list.getDoctorName());
-                        startActivity(intent);
-                        getActivity().overridePendingTransition(R.anim.translate,R.anim.translateleft);
+
+                            BasePresenter presenter = getPresenter();
+                            if (presenter != null) {
+                                ((ICoolor_DoctorList.IPresenter)presenter).getConsultDoctor(list.getDoctorId());
+
+                        }
                     }
                 }
 
@@ -146,7 +164,7 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
         iv_xiangqing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (DoctorListBean.ResultBean list:result){
+                for (DoctorListBean.ResultBean list: result){
                     if (list.getIs()){
                         Intent intent = new Intent(getActivity(), DoctorInfoActivity.class);
                         intent.putExtra("id",list.getDoctorId());
@@ -157,6 +175,51 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
             }
         });
     }
+
+    @Override
+    public void getConsultDoctorSuccess(ConsultDoctorBean consultDoctorBean) {
+
+
+        if (consultDoctorBean.getMessage().equals("查询成功")){
+            for (DoctorListBean.ResultBean list: result){
+                if (list.getIs()){
+                    Intent intent = new Intent(getContext(), SpeakActivity.class);
+                    intent.putExtra("UserName",consultDoctorBean.getDoctorUserName());
+                    intent.putExtra("doctorname",list.getDoctorName());
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.translate,R.anim.translateleft);
+                }
+            }
+        }else if (consultDoctorBean.getMessage().equals("有正在沟通中的咨询")){
+            View view = getLayoutInflater().inflate(R.layout.dialog, null);
+            TextView textView=view.findViewById(R.id.textView);
+            TextView tv_jieshu=view.findViewById(R.id.tv_jieshu);
+            MyDialog mMyDialog = new MyDialog(getContext(), 0, 0, view, R.style.DialogTheme);
+            mMyDialog.setCancelable(true);
+            mMyDialog.show();
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mMyDialog.dismiss();
+                }
+            });
+            tv_jieshu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mMyDialog.dismiss();
+                }
+            });
+
+        }
+
+
+    }
+
+    @Override
+    public void getCurrentInquiryRecordSuccess(CurrentInquiryRecordBean currentInquiryRecordBean) {
+
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void getId(Integer id){
         BasePresenter presenter = getPresenter();
@@ -178,6 +241,24 @@ public class Fragment_Comprehensive extends BaseFragment implements ICoolor_Doct
         super.onPause();
         EventBus.getDefault().unregister(this);
     }
+    private void showTwo() {
 
+        builder = new AlertDialog.Builder(getContext()).setIcon(R.mipmap.ic_launcher).setTitle("最普通dialog")
+                .setMessage("我是最简单的dialog").setPositiveButton("确定（积极）", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //ToDo: 你想做的事情
+                       // Toast.makeText(MainActivity.this, "确定按钮", Toast.LENGTH_LONG).show();
+                    }
+                }).setNegativeButton("取消（消极）", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //ToDo: 你想做的事情
+                       // Toast.makeText(MainActivity.this, "关闭按钮", Toast.LENGTH_LONG).show();
+                        dialogInterface.dismiss();
+                    }
+                });
+        builder.create().show();
+    }
 
 }

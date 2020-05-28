@@ -6,7 +6,7 @@ import com.wd.inquiry.bean.DoctorListBean;
 
 public interface ICoolor_ConsultDoctor {
     interface IView extends IBaseView{
-        //查询问诊医生列表
+        //咨询医生
         void getConsultDoctorSuccess(ConsultDoctorBean consultDoctorBean);
     }
     interface IPresenter{
