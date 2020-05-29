@@ -4,6 +4,8 @@ import com.wd.common.base.util.Base.IBaseView;
 import com.wd.home.bean.HomeBannerBean;
 import com.wd.home.bean.HomeDepartmentBean;
 import com.wd.home.bean.HomeDetailBean;
+import com.wd.home.bean.HomeDetailCollectionBean;
+import com.wd.home.bean.HomeDetailDeleteBean;
 import com.wd.home.bean.HomeDiseaseDetailBean;
 import com.wd.home.bean.HomeDrugsDetailBean;
 import com.wd.home.bean.HomeDrugsKnowledgeBean;
@@ -31,6 +33,8 @@ public interface IHomeContract {
         void onHomeDrugsCategory(HomeFindDrugsCategoryBean homeFindDrugsCategoryBean);
         void onHomeDrugsKnowledge(HomeDrugsKnowledgeBean homeDrugsKnowledgeBean);
         void onHomeDrugsDetail(HomeDrugsDetailBean homeDrugsDetailBean);
+        void onDetailCollection(HomeDetailCollectionBean homeDetailCollectionBean);
+        void onDetailCanelCollection(HomeDetailDeleteBean homeDetailDeleteBean);
     }
     interface IPresenter{
         void getBanner();
@@ -44,6 +48,8 @@ public interface IHomeContract {
         void getHomeDrugsCategory();
         void getHomeDrugsKnowledge(int drugsCategoryId,int page,int count);
         void getHomeDrugsDetail(int id);
+        void getDetailCollection(int infoId);
+        void getDetailCanelCollection(int infoId);
     }
     interface IModel{
         void onGetBanner(IBannerCallBack iBannerCallBack);
@@ -57,6 +63,8 @@ public interface IHomeContract {
         void getHomeDrugsCategory(IHomeDrugsCategoryCallBack iHomeDrugsCategoryCallBack);
         void getHomeDrugsKnowledge(int drugsCategoryId,int page,int count,IHomeDrugsKnowledgeCallBack iHomeDrugsKnowledgeCallBack);
         void getHomeDrugsDetail(int id,IHomeDrugsDetailCallBack iHomeDrugsDetailCallBack);
+        void getDetailCollection(int infoId,IDetailCollectionCallBack iDetailCollectionCallBack);
+        void getDetailCanelCollection(int infoId,IDetailCanelCollectionCallBack iDetailCanelCollectionCallBack);
         interface IBannerCallBack{
             void onBanner(HomeBannerBean homeBannerBean);
         }
@@ -89,6 +97,12 @@ public interface IHomeContract {
         }
         interface IHomeDrugsDetailCallBack{
             void onHomeDrugsDetail(HomeDrugsDetailBean homeDrugsDetailBean);
+        }
+        interface IDetailCollectionCallBack{
+            void onDetailCollection(HomeDetailCollectionBean homeDetailCollectionBean);
+        }
+        interface IDetailCanelCollectionCallBack{
+            void onDetailCanelCollection(HomeDetailDeleteBean homeDetailDeleteBean);
         }
     }
 }

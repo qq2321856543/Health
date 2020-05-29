@@ -5,6 +5,8 @@ import com.wd.common.base.util.Base.IBaseView;
 import com.wd.home.bean.HomeBannerBean;
 import com.wd.home.bean.HomeDepartmentBean;
 import com.wd.home.bean.HomeDetailBean;
+import com.wd.home.bean.HomeDetailCollectionBean;
+import com.wd.home.bean.HomeDetailDeleteBean;
 import com.wd.home.bean.HomeDiseaseDetailBean;
 import com.wd.home.bean.HomeDrugsDetailBean;
 import com.wd.home.bean.HomeDrugsKnowledgeBean;
@@ -184,6 +186,34 @@ public class HomePresenter extends BasePresenter implements IHomeContract.IPrese
                 if(view instanceof IHomeContract.IView){
                     IHomeContract.IView iView= (IHomeContract.IView) view;
                     iView.onHomeDrugsDetail(homeDrugsDetailBean);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getDetailCollection(int infoId) {
+        model.getDetailCollection(infoId, new IHomeContract.IModel.IDetailCollectionCallBack() {
+            @Override
+            public void onDetailCollection(HomeDetailCollectionBean homeDetailCollectionBean) {
+                IBaseView view = getView();
+                if(view instanceof IHomeContract.IView){
+                    IHomeContract.IView iView= (IHomeContract.IView) view;
+                    iView.onDetailCollection(homeDetailCollectionBean);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getDetailCanelCollection(int infoId) {
+        model.getDetailCanelCollection(infoId, new IHomeContract.IModel.IDetailCanelCollectionCallBack() {
+            @Override
+            public void onDetailCanelCollection(HomeDetailDeleteBean homeDetailDeleteBean) {
+                IBaseView view = getView();
+                if(view instanceof IHomeContract.IView){
+                    IHomeContract.IView iView= (IHomeContract.IView) view;
+                    iView.onDetailCanelCollection(homeDetailDeleteBean);
                 }
             }
         });

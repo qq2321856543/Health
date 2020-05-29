@@ -3,11 +3,12 @@
     package="com.wd.login">
 
     <application>
-        <activity android:name=".activity.activity.GuidePageActivity"></activity>
+        <activity android:name=".activity.wxapi.WXEntryActivity"></activity>
+        <activity android:name=".activity.activity.GuidePageActivity" />
         <activity android:name=".activity.activity.LoginSetNewPassWordActivity" />
         <activity android:name=".activity.activity.LoginForgetPassWordActivity" />
         <activity android:name=".activity.activity.LoginRegisterActivity" />
-        <activity android:name=".activity.activity.LoginLonginActivity"></activity>
+        <activity android:name=".activity.activity.LoginLonginActivity" />
         <activity android:name=".activity.activity.LoginLaunchPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

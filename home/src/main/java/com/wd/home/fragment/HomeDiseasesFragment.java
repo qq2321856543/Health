@@ -1,5 +1,6 @@
 package com.wd.home.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,11 +14,14 @@ import com.wd.common.base.util.Base.BaseFragment;
 import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.home.R;
 import com.wd.home.R2;
+import com.wd.home.activity.HomeDiseasesDetailActivity;
 import com.wd.home.adapter.HomeDiseasesLeftAdapter;
 import com.wd.home.adapter.HomeDiseasesRightAdapter;
 import com.wd.home.bean.HomeBannerBean;
 import com.wd.home.bean.HomeDepartmentBean;
 import com.wd.home.bean.HomeDetailBean;
+import com.wd.home.bean.HomeDetailCollectionBean;
+import com.wd.home.bean.HomeDetailDeleteBean;
 import com.wd.home.bean.HomeDiseaseDetailBean;
 import com.wd.home.bean.HomeDrugsDetailBean;
 import com.wd.home.bean.HomeDrugsKnowledgeBean;
@@ -81,12 +85,17 @@ public class HomeDiseasesFragment extends BaseFragment implements IHomeContract.
         rvLeft.setAdapter(adapter);
         adapter.Click(new HomeDiseasesLeftAdapter.onClick() {
             @Override
-            public void setClick(int id) {
+            public void setClick(int id, int position) {
+                //点击变色
+                for (HomeDepartmentBean.ResultBean bean:list){
+                    bean.setCheck(false);
+                }
+                list.get(position).setCheck(true);
                 BasePresenter presenter = getPresenter();
                 if (presenter instanceof IHomeContract.IPresenter) {
                     ((IHomeContract.IPresenter)presenter).getFindDisease(id);
-
                 }
+                adapter.notifyDataSetChanged();
             }
         });
     }
@@ -98,6 +107,15 @@ public class HomeDiseasesFragment extends BaseFragment implements IHomeContract.
         HomeDiseasesRightAdapter adapter = new HomeDiseasesRightAdapter(getActivity(), list);
         rvRight.setLayoutManager(manager);
         rvRight.setAdapter(adapter);
+        adapter.Click(new HomeDiseasesRightAdapter.onClick() {
+            @Override
+            public void setClick(int id, String name) {
+                Intent intent = new Intent(getActivity(), HomeDiseasesDetailActivity.class);
+                intent.putExtra("diseaseId", id);
+                intent.putExtra("name",name);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -142,6 +160,16 @@ public class HomeDiseasesFragment extends BaseFragment implements IHomeContract.
 
     @Override
     public void onHomeDrugsDetail(HomeDrugsDetailBean homeDrugsDetailBean) {
+
+    }
+
+    @Override
+    public void onDetailCollection(HomeDetailCollectionBean homeDetailCollectionBean) {
+
+    }
+
+    @Override
+    public void onDetailCanelCollection(HomeDetailDeleteBean homeDetailDeleteBean) {
 
     }
 

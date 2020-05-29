@@ -47,13 +47,13 @@ public class HomeDiseasesRightAdapter extends RecyclerView.Adapter<RecyclerView.
         ((ViewHolder)viewHolder).tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                monClick.setClick(id);
+                monClick.setClick(id,bean.getName());
             }
         });
     }
     private onClick monClick;
     public interface onClick{
-        void setClick(int id);
+        void setClick(int id,String name);
     }
     public void Click(onClick onClick){
         monClick=onClick;

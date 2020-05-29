@@ -4,6 +4,8 @@ import com.wd.common.base.util.util.RetrofitUtil;
 import com.wd.home.bean.HomeBannerBean;
 import com.wd.home.bean.HomeDepartmentBean;
 import com.wd.home.bean.HomeDetailBean;
+import com.wd.home.bean.HomeDetailCollectionBean;
+import com.wd.home.bean.HomeDetailDeleteBean;
 import com.wd.home.bean.HomeDiseaseDetailBean;
 import com.wd.home.bean.HomeDrugsDetailBean;
 import com.wd.home.bean.HomeDrugsKnowledgeBean;
@@ -344,6 +346,66 @@ public class HomeModel implements IHomeContract.IModel {
                     public void onNext(HomeDrugsDetailBean homeDrugsDetailBean) {
                         if(iHomeDrugsDetailCallBack!=null){
                             iHomeDrugsDetailCallBack.onHomeDrugsDetail(homeDrugsDetailBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void getDetailCollection(int infoId, IDetailCollectionCallBack iDetailCollectionCallBack) {
+        createrRetrofit().getDetailCollection(infoId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<HomeDetailCollectionBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(HomeDetailCollectionBean homeDetailCollectionBean) {
+                        if(iDetailCollectionCallBack!=null){
+                            iDetailCollectionCallBack.onDetailCollection(homeDetailCollectionBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void getDetailCanelCollection(int infoId, IDetailCanelCollectionCallBack iDetailCanelCollectionCallBack) {
+        createrRetrofit().getCanelCollection(infoId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<HomeDetailDeleteBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(HomeDetailDeleteBean homeDetailDeleteBean) {
+                        if(iDetailCanelCollectionCallBack!=null){
+                            iDetailCanelCollectionCallBack.onDetailCanelCollection(homeDetailDeleteBean);
                         }
                     }
 

@@ -3,16 +3,15 @@ package com.wd.home.fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
@@ -23,14 +22,20 @@ import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.common.base.util.util.SPUtils;
 import com.wd.home.R;
 import com.wd.home.R2;
+import com.wd.home.activity.HomeCarouselActivity;
 import com.wd.home.activity.HomeInformationActivity;
 import com.wd.home.activity.HomeKnowledgeActivity;
+import com.wd.home.activity.HomeMoreActivity;
+import com.wd.home.activity.HomeSearchActivity;
 import com.wd.home.adapter.HomeConsultAdapter;
+import com.wd.home.adapter.HomeFindListAdapter;
 import com.wd.home.adapter.HomeHealthListAdapter;
 import com.wd.home.adapter.HomeHealthTitleAdapter;
 import com.wd.home.bean.HomeBannerBean;
 import com.wd.home.bean.HomeDepartmentBean;
 import com.wd.home.bean.HomeDetailBean;
+import com.wd.home.bean.HomeDetailCollectionBean;
+import com.wd.home.bean.HomeDetailDeleteBean;
 import com.wd.home.bean.HomeDiseaseDetailBean;
 import com.wd.home.bean.HomeDrugsDetailBean;
 import com.wd.home.bean.HomeDrugsKnowledgeBean;
@@ -47,6 +52,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -74,7 +80,10 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
     ImageView ivHomeDiseases;
     @BindView(R2.id.iv_home_drug)
     ImageView ivHomeDrug;
-
+    @BindView(R2.id.tv_home_more)
+    TextView tvHomeMore;
+    int moreId;
+    String title;
     @Override
     protected BasePresenter initPresenter() {
         return new HomePresenter(this);
@@ -91,6 +100,13 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
         etHomeSearch.getBackground().setAlpha(30);
     }
 
+    @OnClick(R2.id.et_home_search)
+    public void et_home_search() {
+        Intent intent = new Intent(getActivity(), HomeSearchActivity.class);
+        startActivity(intent);
+    }
+
+
     @Override
     protected void initData() {
         BasePresenter presenter = getPresenter();
@@ -104,7 +120,7 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), HomeKnowledgeActivity.class);
-                intent.putExtra("page",0);
+                intent.putExtra("page", 0);
                 startActivity(intent);
             }
         });
@@ -112,7 +128,7 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), HomeKnowledgeActivity.class);
-                intent.putExtra("page",0);
+                intent.putExtra("page", 1);
                 startActivity(intent);
             }
         });
@@ -125,7 +141,24 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
                 ARouter.getInstance().build("/my/MyMyMainActivity").navigation();
             }
         });
+        etHomeSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b == true) {
+                    Intent intent = new Intent(getActivity(), HomeSearchActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        tvHomeMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), HomeMoreActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
 
     @Override
     public void onBanner(HomeBannerBean homeBannerBean) {
@@ -142,6 +175,17 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
                 Glide.with(getActivity()).load(imageUrl).placeholder(R.mipmap.ic_launcher).into((ImageView) view);
             }
         });
+        xbHome.setOnItemClickListener(new XBanner.OnItemClickListener() {
+            @Override
+            public void onItemClick(XBanner banner, Object model, View view, int position) {
+                HomeBannerBean.ResultBean resultBean = list.get(position);
+                String jumpUrl = resultBean.getJumpUrl();
+                Intent intent = new Intent(getActivity(), HomeCarouselActivity.class);
+                intent.putExtra("jumpUrl",jumpUrl);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -152,17 +196,27 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
     @Override
     public void onPlateList(HomePlateListBean homePlateListBean) {
         List<HomePlateListBean.ResultBean> result = homePlateListBean.getResult();
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
         HomeHealthTitleAdapter adapter = new HomeHealthTitleAdapter(getActivity(), result);
         rvHomeTitle.setLayoutManager(linearLayoutManager);
         rvHomeTitle.setAdapter(adapter);
         adapter.Click(new HomeHealthTitleAdapter.onClick() {
             @Override
-            public void setClick(int id) {
+            public void setClick(int id, String name, int position) {
+                //点击变色
+                for (HomePlateListBean.ResultBean bean:result){
+                    bean.setCheck(false);
+                }
+                result.get(position).setCheck(true);
+                moreId=id;
+                title=name;
                 BasePresenter presenter = getPresenter();
                 if (presenter instanceof IHomeContract.IPresenter) {
                     ((IHomeContract.IPresenter) presenter).getFindList(id, 1, 5);
                 }
+
+                adapter.notifyDataSetChanged();
             }
         });
     }
@@ -171,12 +225,12 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
     public void onFindList(HomeFindListBean homeFindListBean) {
         List<HomeFindListBean.ResultBean> list = homeFindListBean.getResult();
         LinearLayoutManager manager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
-        HomeHealthListAdapter adapter = new HomeHealthListAdapter(getActivity(), list);
+        HomeFindListAdapter adapter = new HomeFindListAdapter(getActivity(), list);
         rvHomeHealth.setLayoutManager(manager);
         rvHomeHealth.setAdapter(adapter);
-        adapter.Click(new HomeHealthListAdapter.onClick() {
+        adapter.setOnClick(new HomeFindListAdapter.SetOnClick() {
             @Override
-            public void setClick(int id, String img) {
+            public void getId(int id, String img) {
                 Intent intent = new Intent(getActivity(), HomeInformationActivity.class);
                 intent.putExtra("id", id);
                 intent.putExtra("img", img);
@@ -200,7 +254,7 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
         adapter.Click(new HomeConsultAdapter.onClick() {
             @Override
             public void setClick(int id) {
-                ARouter.getInstance().build("/inquiry/InquiryMainActivity") .withInt("id",id).navigation();
+                ARouter.getInstance().build("/inquiry/InquiryMainActivity").withInt("id", id).navigation();
 
             }
         });
@@ -232,6 +286,16 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
     }
 
     @Override
+    public void onDetailCollection(HomeDetailCollectionBean homeDetailCollectionBean) {
+
+    }
+
+    @Override
+    public void onDetailCanelCollection(HomeDetailDeleteBean homeDetailDeleteBean) {
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
 
@@ -239,8 +303,6 @@ public class HomeHomeFragment extends BaseFragment implements IHomeContract.IVie
         unbinder = ButterKnife.bind(this, rootView);
         return rootView;
     }
-
-
 
 
     @Override

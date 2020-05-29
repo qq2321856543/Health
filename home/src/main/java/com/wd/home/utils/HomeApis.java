@@ -3,17 +3,23 @@ package com.wd.home.utils;
 import com.wd.home.bean.HomeBannerBean;
 import com.wd.home.bean.HomeDepartmentBean;
 import com.wd.home.bean.HomeDetailBean;
+import com.wd.home.bean.HomeDetailCollectionBean;
+import com.wd.home.bean.HomeDetailDeleteBean;
 import com.wd.home.bean.HomeDiseaseDetailBean;
 import com.wd.home.bean.HomeDrugsDetailBean;
 import com.wd.home.bean.HomeDrugsKnowledgeBean;
 import com.wd.home.bean.HomeFindDiseaseBean;
 import com.wd.home.bean.HomeFindDrugsCategoryBean;
 import com.wd.home.bean.HomeFindListBean;
+import com.wd.home.bean.HomePageSearchBean;
 import com.wd.home.bean.HomePlateListBean;
 import com.wd.home.bean.HomeSearchBean;
+import com.wd.home.bean.PopularSearchesBean;
 
 import io.reactivex.Observable;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -30,8 +36,14 @@ public interface HomeApis {
     Observable<HomePlateListBean>getHomePlateList();
     @GET("health/share/information/v1/findInformationList")
     Observable<HomeFindListBean>getHomeList(@Query("plateId")int plateId,@Query("page")int page,@Query("count")int count);
+    //资讯详情
     @GET("health/share/information/v1/findInformation")
     Observable<HomeDetailBean>getHomeDetail(@Query("infoId")int infoId);
+    //资讯详情收藏
+    @POST("health/user/verify/v1/addInfoCollection")
+    Observable<HomeDetailCollectionBean>getDetailCollection(@Query("infoId")int infoId);
+    @DELETE("health/user/verify/v1/cancelInfoCollection")
+    Observable<HomeDetailDeleteBean>getCanelCollection(@Query("infoId")int infoId);
     //查询科室列表
     @GET("health/share/knowledgeBase/v1/findDepartment")
     Observable<HomeDepartmentBean>getHomeDepartment();
@@ -50,4 +62,12 @@ public interface HomeApis {
     //药品详情
     @GET("health/share/knowledgeBase/v1/findDrugsKnowledge")
     Observable<HomeDrugsDetailBean>getHomeDrugsDetail(@Query("id")int id);
+    //首页搜索
+    @GET("health/share/v1/homePageSearch")
+    Observable<HomePageSearchBean> homePageSearch(@Query("keyWord")String keyWord);
+    //热门搜索
+    @GET("health/share/v1/popularSearch")
+    Observable<PopularSearchesBean> popularSearch();
+
+
 }

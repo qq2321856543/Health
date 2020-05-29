@@ -59,6 +59,15 @@ public class HomeDiseaseDetailBean {
         private int id;
         private String pathology;
         private String symptom;
+        private String westernMedicineTreatment;
+
+        public String getWesternMedicineTreatment() {
+            return westernMedicineTreatment;
+        }
+
+        public void setWesternMedicineTreatment(String westernMedicineTreatment) {
+            this.westernMedicineTreatment = westernMedicineTreatment;
+        }
 
         public String getBenefitTaboo() {
             return benefitTaboo;

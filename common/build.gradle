@@ -20,6 +20,22 @@ android {
         }
 
     }
+    signingConfigs {
+        release {
+            keyAlias 'health'
+            //自己的密码
+            keyPassword '123456'
+            //自己的keystore文件路径
+            storeFile file('D:\\Android\\WorkSpace6\\Health\\app\\src\\main\\java\\com\\wd\\health\\movie.keystore')
+            storePassword '123456'
+        }
+        debug {
+            keyAlias 'health'
+            keyPassword '123456'
+            storeFile file('D:\\Android\\WorkSpace6\\Health\\app\\src\\main\\java\\com\\wd\\health\\movie.keystore')
+            storePassword '123456'
+        }
+    }
 
     buildTypes {
         release {
@@ -102,4 +118,6 @@ dependencies {
     api 'com.bigkoo:ConvenientBanner:2.1.4'
     //阴影
     api 'io.github.meetsl:SCardView:1.0'
+    //微信登录
+    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
 }
