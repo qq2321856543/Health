@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".activity.CurrentConsultationActivity">
     <LinearLayout
-        android:layout_marginTop="@dimen/dp40"
+        android:layout_marginTop="@dimen/dp30"
         android:layout_marginLeft="@dimen/dp20"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,11 +31,107 @@
                 />
         </LinearLayout>
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="#F1F1F1"
+        android:layout_height="7dp">
+        
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/iv_max"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="centerCrop"/>
+        <com.meetsl.scardview.SCardView
+            android:id="@+id/scv"
+            android:layout_below="@id/iv_max"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="13dp"
+            android:layout_marginTop="-40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#FDFDFE"
+            app:cardShadowStartColor="#57FF4081"
+            app:cardShadowEndColor="#03FF4081"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="10dp"
+            app:cardLightDirection="LT">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="140dp">
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:textSize="16sp"
+                android:textColor="#070102"
+                android:text="曾小贤"/>
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="副主任医师"/>
+            <TextView
+                android:id="@+id/tv_keshi"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="小儿科"/>
+            <TextView
+                android:id="@+id/tv_shijian"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                android:text="问诊时间897879798"/>
+        </LinearLayout>
+        </com.meetsl.scardview.SCardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_below="@id/scv"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/bt_left"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:text="继续问诊"
+                android:layout_gravity="center"
+                android:layout_marginRight="50dp"
+                android:background="#989898"
+                android:textColor="#FDFDFE"/>
+            <Button
+                android:id="@+id/bt_right"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:text="结束问诊"
+                android:layout_gravity="center"
+                android:background="#3086E9"
+                android:textColor="#FDFDFE"/>
+        </LinearLayout>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
+        android:visibility="gone"
         android:id="@+id/lly_current_nomessage"
         >
         <ImageView

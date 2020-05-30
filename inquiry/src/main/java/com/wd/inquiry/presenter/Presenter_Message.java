@@ -1,5 +1,7 @@
 package com.wd.inquiry.presenter;
 
+import android.util.Log;
+
 import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.common.base.util.Base.IBaseView;
 import com.wd.inquiry.bean.CurrentInquiryRecordBean;
@@ -23,6 +25,7 @@ public class Presenter_Message extends BasePresenter implements ICoolor_Message.
 
     @Override
     public void getPushMessage(int inquiryId, String content, int type, int doctorId) {
+
         model.getPushMessage(inquiryId, content, type, doctorId, new ICoolor_Message.PushMessageCallback() {
             @Override
             public void getSuccess(PushMessageBean pushMessageBean) {
@@ -37,6 +40,8 @@ public class Presenter_Message extends BasePresenter implements ICoolor_Message.
 
     @Override
     public void getInquiryRecordList(int inquiryId, int page, int count) {
+        Log.i("ppp","getInquiryRecordList");
+
         model.getInquiryRecordList(inquiryId, page, count, new ICoolor_Message.InquiryRecordListCallback() {
             @Override
             public void getSuccess(InquiryRecordListBean inquiryRecordListBean) {

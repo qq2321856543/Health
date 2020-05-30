@@ -1,5 +1,7 @@
 package com.wd.inquiry.model;
 
+import android.util.Log;
+
 import com.wd.common.base.util.util.RetrofitUtil;
 import com.wd.inquiry.base.InquiryApis;
 import com.wd.inquiry.bean.CurrentInquiryRecordBean;
@@ -50,22 +52,27 @@ public class Model_Message implements ICoolor_Message.IModel {
                 .subscribe(new Observer<InquiryRecordListBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        Log.i("ppp","onSubscribe");
                     }
 
                     @Override
                     public void onNext(InquiryRecordListBean inquiryRecordListBean) {
+                        Log.i("ppp","onNext");
+
                         inquiryRecordListCallback.getSuccess(inquiryRecordListBean);
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        e.printStackTrace();
+                        Log.i("ppp","onError"+e.getMessage());
 
                     }
 
                     @Override
                     public void onComplete() {
+                        Log.i("ppp","onComplete");
 
                     }
                 });

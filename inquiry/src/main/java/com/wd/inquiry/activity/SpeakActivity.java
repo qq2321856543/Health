@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.AbstractDraweeController;
 import com.facebook.imagepipeline.request.ImageRequest;
@@ -58,7 +60,7 @@ import cn.jpush.im.android.api.model.Conversation;
 import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.android.api.model.UserInfo;
 import cn.jpush.im.api.BasicCallback;
-
+@Route(path = "/inquiry/SpeakActivity")
 public class SpeakActivity extends BaseAcitvity implements ICoolor_Message.IView {
     ArrayList<MessageBean> list = new ArrayList<>();
 
@@ -74,7 +76,7 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_Message.IView
     private EditText et;
     private MessageAdapter messageAdapter;
     Boolean is=false;
-    private String imname;
+    private String imname="";
     private int recordId;
     private int doctorId;
     MessageBean messageBean = new MessageBean();
@@ -96,7 +98,7 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_Message.IView
         iv_back = findViewById(R.id.iv_back);
         tv_name = findViewById(R.id.tv_name);
 
-        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this,RecyclerView.VERTICAL,true);
         rv.setLayoutManager(layoutManager);
         messageAdapter = new MessageAdapter(this);
         rv.setAdapter(messageAdapter);
@@ -109,12 +111,14 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_Message.IView
         if (presenter != null) {
             ((ICoolor_Message.IPresenter)presenter).getCurrentInquiryRecord();
         }
+
         //获取历史消息
         MessageList();
         String userName = getIntent().getStringExtra("UserName");
         String doctorname = getIntent().getStringExtra("doctorname");
         try {
-            imname = RsaCoder.decryptByPublicKey(userName);
+            String Jname = RsaCoder.decryptByPublicKey(userName);
+            imname=Jname;
             Log.i("ooo",""+imname);
         } catch (Exception e) {
             e.printStackTrace();
@@ -156,11 +160,11 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_Message.IView
                 if (presenter != null) {
                     ((ICoolor_Message.IPresenter)presenter).getPushMessage(recordId,string,1,doctorId);
                 }
-                messageBean.setSendMessage(string);
-                messageBean.setCloseMessage("");
-                messageBean.setType(2);
-                list.add(messageBean);
-                messageAdapter.setData(list);
+//                messageBean.setSendMessage(string);
+//                messageBean.setCloseMessage("");
+//                messageBean.setType(2);
+//                list.add(messageBean);
+               // messageAdapter.setData(list);
             }
         });
         Runnable task = new Runnable() {
@@ -177,7 +181,7 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_Message.IView
     }
     public void sendMess(String name,String str){
                 //创建跨应用会话
-        Conversation con = Conversation.createSingleConversation(name, "b5f102cc307091e167ce52e0");
+        Conversation con = Conversation.createSingleConversation("HaNX8z3254402544", "b5f102cc307091e167ce52e0");
         MessageContent content = new TextContent(str);
         //创建一条消息
         Message message = con.createSendMessage(content);
@@ -217,13 +221,16 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_Message.IView
 //    }
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void getText(String str){
-        MessageBean messageBean = new MessageBean();
-        messageBean.setCloseMessage(str);
-        messageBean.setSendMessage("");
-        messageBean.setType(1);
-        list.add(messageBean);
-        messageAdapter.setData(list);
-
+//        MessageBean messageBean = new MessageBean();
+//        messageBean.setCloseMessage(str);
+//        messageBean.setSendMessage("");
+//        messageBean.setType(1);
+//        list.add(messageBean);
+        //messageAdapter.setData(list);
+        BasePresenter presenter = getPresenter();
+        if (presenter != null) {
+            ((ICoolor_Message.IPresenter)presenter).getInquiryRecordList(recordId,1,20);
+        }
     }
 
     private boolean isInputMethodShowing() {
@@ -289,28 +296,37 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_Message.IView
     public void getPushMessageSuccess(PushMessageBean pushMessageBean) {
 
         Toast.makeText(this, ""+pushMessageBean.getMessage(), Toast.LENGTH_SHORT).show();
+        BasePresenter presenter = getPresenter();
+        if (presenter != null) {
+            ((ICoolor_Message.IPresenter)presenter).getInquiryRecordList(recordId,1,20);
+        }
     }
 
     @Override
     public void getInquiryRecordListSuccess(InquiryRecordListBean inquiryRecordListBean) {
         List<InquiryRecordListBean.ResultBean> result = inquiryRecordListBean.getResult();
-        for (InquiryRecordListBean.ResultBean resultBean:result){
-            int direction = resultBean.getDirection();
-            String content = resultBean.getContent();
-            if (direction==1){
-                //发送消息
-                messageBean.setSendMessage(content);
-                messageBean.setType(2);
-            }else {
-                //接受消息
-                messageBean.setSendMessage(content);
-                messageBean.setType(1);
-            }
-        }
-        Long askTime = result.get(result.size() - 1).getAskTime();
-        messageBean.setTime(askTime);
-        list.add(messageBean);
-        messageAdapter.setData(list);
+//        for (InquiryRecordListBean.ResultBean resultBean:result){
+//            int direction = resultBean.getDirection();
+//            String content = resultBean.getContent();
+//            if (direction==1){
+//                //发送消息
+//                messageBean.setSendMessage(content);
+//                messageBean.setType(2);
+//            }else {
+//                //接受消息
+//                messageBean.setSendMessage(content);
+//                messageBean.setType(1);
+//            }
+//            list.add(messageBean);
+//
+//        }
+//        if (result.size()!=0){
+//            Long askTime = result.get(result.size() - 1).getAskTime();
+//            messageBean.setTime(askTime);
+//        }
+        ArrayList<InquiryRecordListBean.ResultBean> resultBeans = new ArrayList<>();
+        resultBeans.addAll(result);
+        messageAdapter.setData(resultBeans);
     }
 
     @Override
@@ -318,6 +334,10 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_Message.IView
         //问诊id
         recordId = currentInquiryRecordBean.getResult().getRecordId();
         doctorId = currentInquiryRecordBean.getResult().getDoctorId();
+        BasePresenter presenter = getPresenter();
+        if (presenter != null) {
+            ((ICoolor_Message.IPresenter)presenter).getInquiryRecordList(recordId,1,20);
+        }
     }
     public void MessageList(){
         BasePresenter presenter = getPresenter();

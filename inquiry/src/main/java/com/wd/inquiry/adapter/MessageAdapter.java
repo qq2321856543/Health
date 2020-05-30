@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.wd.common.base.util.util.SPUtils;
 import com.wd.inquiry.R;
+import com.wd.inquiry.bean.InquiryRecordListBean;
 import com.wd.inquiry.bean.MessageBean;
 
 import java.text.SimpleDateFormat;
@@ -21,13 +22,13 @@ import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    private ArrayList<MessageBean> list = new ArrayList<>();
+    private ArrayList<InquiryRecordListBean.ResultBean> list = new ArrayList<>();
 
 
     public MessageAdapter(Context context) {
         this.context = context;
     }
-    public void setData(ArrayList<MessageBean> mlist){
+    public void setData(ArrayList<InquiryRecordListBean.ResultBean> mlist){
         list = mlist;
         notifyDataSetChanged();
     }
@@ -36,12 +37,12 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         if (i==1){
-            //接收
-            View view = View.inflate(context, R.layout.item_messageone, null);
+            //发送
+            View view = View.inflate(context, R.layout.item_messagetwo, null);
             ViewHolder viewHolder = new ViewHolder(view);
             return viewHolder;
         }else {
-            View view = View.inflate(context, R.layout.item_messagetwo, null);
+            View view = View.inflate(context, R.layout.item_messageone, null);
             ViewHolder viewHolder = new ViewHolder(view);
             return viewHolder;
         }
@@ -49,27 +50,28 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        if (list.get(i).getType()==1){
+        if (list.get(i).getDirection()==1){
 
-            ((ViewHolder)viewHolder).tv.setText(list.get(i).getCloseMessage());
-            if (list.get(i).getTime()!=null){
-                Date date = new Date(list.get(i).getTime());
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String format = dateFormat.format(date);
-                String[] split = format.split("-");
-                ((ViewHolder)viewHolder).tv_shijian.setText(split[0]+"-"+split[1]+"-"+split[2]);
-            }
-        }else {
-            ((ViewHolder)viewHolder).tv.setText(list.get(i).getSendMessage());
+            ((ViewHolder)viewHolder).tv.setText(list.get(i).getContent());
             String head = SPUtils.getString(context, SPUtils.USERINFO_NAME, "head");
             ((ViewHolder)viewHolder).iv.setImageURI(Uri.parse(head));
-            if (list.get(i).getTime()!=null){
-                Date date = new Date(list.get(i).getTime());
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String format = dateFormat.format(date);
-                String[] split = format.split("-");
-                ((ViewHolder)viewHolder).tv_shijian.setText(split[0]+"-"+split[1]+"-"+split[2]);
-            }
+//            if (list.get(i).getTime()!=null){
+//                Date date = new Date(list.get(i).getTime());
+//                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//                String format = dateFormat.format(date);
+//                String[] split = format.split("-");
+//                ((ViewHolder)viewHolder).tv_shijian.setText(split[0]+"-"+split[1]+"-"+split[2]);
+//            }
+        }else {
+            ((ViewHolder)viewHolder).tv.setText(list.get(i).getContent());
+
+//            if (list.get(i).getTime()!=null){
+//                Date date = new Date(list.get(i).getTime());
+//                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//                String format = dateFormat.format(date);
+//                String[] split = format.split("-");
+//                ((ViewHolder)viewHolder).tv_shijian.setText(split[0]+"-"+split[1]+"-"+split[2]);
+//            }
         }
     }
 
@@ -81,7 +83,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public int getItemViewType(int position) {
 
-        return list.get(position).getType();
+        return list.get(position).getDirection();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

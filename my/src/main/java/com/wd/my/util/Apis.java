@@ -4,6 +4,7 @@ package com.wd.my.util;
 
 
 import com.wd.my.bean.ConsultationBean;
+import com.wd.my.bean.EndInquiryBean;
 import com.wd.my.bean.SignInBean;
 import com.wd.my.bean.UpLoadBean;
 import com.wd.my.bean.UserInfoBean;
@@ -14,6 +15,7 @@ import retrofit2.http.Body;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 
@@ -53,4 +55,8 @@ public interface Apis{
      * */
     @GET("health/user/inquiry/verify/v1/findHistoryInquiryRecord")
     Observable<ConsultationBean> getHtistoryConsultation(@Query("page") int page, @Query("count") int count);
+
+    //结束问诊
+    @PUT("health/user/inquiry/verify/v1/endInquiry")
+    Observable<EndInquiryBean> getEndInquiry(@Query("recordId") int recordId);
 }

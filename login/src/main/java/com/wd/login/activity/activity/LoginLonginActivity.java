@@ -155,6 +155,7 @@ public class LoginLonginActivity extends BaseAcitvity implements ILoginContract.
             int id = result.getId();
             String sessionId = result.getSessionId();
             String headPic = result.getHeadPic();
+            Log.i("nnn",""+sessionId);
             String name = result.getNickName();
             SPUtils.putString(this, SPUtils.USERINFO_NAME,SPUtils.USERINFO_KEY_USER_ID,id+"");
             SPUtils.putString(this, SPUtils.USERINFO_NAME,SPUtils.USERINFO_KEY_SESSION_ID,sessionId+"");
