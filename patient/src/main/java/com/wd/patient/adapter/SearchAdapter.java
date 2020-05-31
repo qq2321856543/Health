@@ -1,6 +1,7 @@
 package com.wd.patient.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.wd.patient.R;
 import com.wd.patient.R2;
+import com.wd.patient.activity.PatientParticularsActivity;
 import com.wd.patient.bean.BingYouQuanBean;
 import com.wd.patient.bean.SearchBean;
 
@@ -59,6 +61,14 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         ((ViewHolder)viewHolder).jianyi.setText("建议 "+String.valueOf(mList.get(i).getCommentNum()));
         String time = new SimpleDateFormat(" yyyy-MM-dd HH:mm:ss ").format(new Date(mList.get(i).getReleaseTime()));
         ((ViewHolder)viewHolder).time.setText(time);
+        ((ViewHolder)viewHolder).bottomBei.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, PatientParticularsActivity.class);
+                intent.putExtra("sickCircleId", mList.get(i).getSickCircleId());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

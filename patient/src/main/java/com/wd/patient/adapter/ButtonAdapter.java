@@ -1,8 +1,10 @@
 package com.wd.patient.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import com.wd.patient.R;
 import com.wd.patient.R2;
+import com.wd.patient.activity.PatientParticularsActivity;
 import com.wd.patient.bean.BingYouQuanBean;
 
 import java.text.SimpleDateFormat;
@@ -39,9 +42,8 @@ public class ButtonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public void setData(List<BingYouQuanBean.ResultBean> list) {
-        if (list.size()!=0){
-            mList = list;
-        }
+        Log.i("xxxx", list.get(0).getTitle());
+        mList = list;
         notifyDataSetChanged();
     }
 
@@ -60,6 +62,14 @@ public class ButtonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         ((ViewHolder)viewHolder).jianyi.setText("建议 "+String.valueOf(mList.get(i).getCommentNum()));
         String time = new SimpleDateFormat(" yyyy-MM-dd HH:mm:ss ").format(new Date(mList.get(i).getReleaseTime()));
         ((ViewHolder)viewHolder).time.setText(time);
+        ((ViewHolder)viewHolder).bottomBei.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, PatientParticularsActivity.class);
+                intent.putExtra("sickCircleId", mList.get(i).getSickCircleId());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

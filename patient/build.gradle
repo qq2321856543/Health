@@ -44,9 +44,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     api project(':component')
 
+
     api 'com.alibaba:arouter-api:1.4.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
-
+    implementation 'com.github.huburt-Hu:NewbieGuide:v2.4.0'
     implementation 'com.jakewharton:butterknife:9.0.0-rc2'
     annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc2'
 }

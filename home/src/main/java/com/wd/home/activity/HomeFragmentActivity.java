@@ -51,7 +51,7 @@ public class HomeFragmentActivity extends BaseAcitvity {
         data.add("小视频");
         HomeHomeFragment homeHomeFragment = new HomeHomeFragment();
         PatientHomePageFragment patientHomePageFragment = new PatientHomePageFragment();
-        //TestFragment testFragment = new TestFragment();
+        TestFragment testFragment = new TestFragment();
         TestFragment2 fragment2 = new TestFragment2();
         list.add(homeHomeFragment);
         list.add(patientHomePageFragment);
@@ -61,6 +61,7 @@ public class HomeFragmentActivity extends BaseAcitvity {
         tbHome.addTab(tbHome.newTab().setText(data.get(2)));
         MyViewPager pager = new MyViewPager(getSupportFragmentManager());
         vpHome.setAdapter(pager);
+        vpHome.setOffscreenPageLimit(3);
         tbHome.setupWithViewPager(vpHome);
     }
 
