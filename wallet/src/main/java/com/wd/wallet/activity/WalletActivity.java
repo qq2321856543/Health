@@ -1,5 +1,7 @@
 package com.wd.wallet.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.wd.common.base.util.Base.BaseAcitvity;
 import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.wallet.R;
@@ -23,6 +27,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+@Route(path = "/wallet/WalletActivity")
 public class WalletActivity extends BaseAcitvity implements WalletContract.IView {
 
 
@@ -36,6 +41,9 @@ public class WalletActivity extends BaseAcitvity implements WalletContract.IView
     RecyclerView rvWallet;
     @BindView(R2.id.iv_wallet_back)
     ImageView ivWalletBack;
+    String str = "http://www.17qq.com/img_qqtouxiang/6062256.jpeg";
+    @BindView(R2.id.iv_bg)
+    SimpleDraweeView ivBg;
 
     @Override
     protected BasePresenter initPresenter() {
@@ -60,16 +68,32 @@ public class WalletActivity extends BaseAcitvity implements WalletContract.IView
     @Override
     protected void initData() {
         BasePresenter presenter = getPresenter();
-        if(presenter instanceof WalletContract.IPresenter){
-            ((WalletContract.IPresenter)presenter).getUserMoney();
-            ((WalletContract.IPresenter)presenter).getRecord(1,10);
+        if (presenter instanceof WalletContract.IPresenter) {
+            ((WalletContract.IPresenter) presenter).getUserMoney();
+            ((WalletContract.IPresenter) presenter).getRecord(1, 10);
         }
+        Uri uri = Uri.parse(str);
+        ivBg.setImageURI(uri);
+        btWalletWithdraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WalletActivity.this, WalletWithdrawActivity.class);
+                startActivity(intent);
+            }
+        });
+        btWalletRecharge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WalletActivity.this, WalletRechargeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     public void onUserMoney(WalletUserBean walletUserBean) {
         int result = walletUserBean.getResult();
-        tvWalletMoney.setText(result+"");
+        tvWalletMoney.setText(result + "");
     }
 
     @Override

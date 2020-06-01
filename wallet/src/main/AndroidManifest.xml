@@ -3,14 +3,17 @@
     package="com.wd.wallet">
 
     <application>
+        <activity android:name=".activity.WalletWithdrawActivity"></activity>
+        <activity android:name=".activity.WalletRechargeActivity" />
         <activity android:name=".activity.WalletActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-
     </application>
 
 </manifest>

@@ -127,6 +127,7 @@ public class LoginLonginActivity extends BaseAcitvity implements ILoginContract.
                     String pwd = etLoginPwd.getText().toString();
                     try {
                         mpwd = RsaCoder.encryptByPublicKey(pwd);
+                        Log.i("MMM",mpwd+"");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
