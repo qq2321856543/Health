@@ -3,11 +3,12 @@
     package="com.wd.my">
 
     <application>
-        <activity android:name=".activity.MyMyMainActivity"></activity>
-        <activity android:name=".activity.CurrentConsultationActivity"></activity>
-        <activity android:name=".activity.HistoryConsultationActivity"></activity>
-        <activity android:name=".activity.SetActivity"></activity>
-        <activity android:name=".activity.UserInfoActivity"></activity>
+        <activity android:name=".activity.UserArchivesActivity"></activity>
+        <activity android:name=".activity.MyMyMainActivity" />
+        <activity android:name=".activity.CurrentConsultationActivity" />
+        <activity android:name=".activity.HistoryConsultationActivity" />
+        <activity android:name=".activity.SetActivity" />
+        <activity android:name=".activity.UserInfoActivity" />
     </application>
 
 </manifest>

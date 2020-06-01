@@ -118,9 +118,10 @@ public class MyMyMainActivity extends BaseAcitvity implements GetUserInfoContrac
             intent.setClass(this, HistoryConsultationActivity.class);
             startActivity(intent);
         }else if(view.getId() == R.id.iv_mine_myinfo) {
-
+            intent.setClass(this, UserArchivesActivity.class);
+            startActivity(intent);
         }else if(view.getId() == R.id.iv_mine_mywallet) {
-
+            ARouter.getInstance().build("/wallet/WalletActivity").navigation();
         }else if(view.getId() == R.id.iv_mine_mycollection) {
 
         }else if(view.getId() == R.id.iv_mine_myadvice) {
