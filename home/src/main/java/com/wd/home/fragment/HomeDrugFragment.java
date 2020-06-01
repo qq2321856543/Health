@@ -1,5 +1,6 @@
 package com.wd.home.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,12 +13,15 @@ import com.wd.common.base.util.Base.BaseFragment;
 import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.home.R;
 import com.wd.home.R2;
+import com.wd.home.activity.HomeDrugDetailActivity;
 import com.wd.home.adapter.HomeDiseasesLeftAdapter;
 import com.wd.home.adapter.HomeDrugLeftAdapter;
 import com.wd.home.adapter.HomeDrugRightAdapter;
 import com.wd.home.bean.HomeBannerBean;
 import com.wd.home.bean.HomeDepartmentBean;
 import com.wd.home.bean.HomeDetailBean;
+import com.wd.home.bean.HomeDetailCollectionBean;
+import com.wd.home.bean.HomeDetailDeleteBean;
 import com.wd.home.bean.HomeDiseaseDetailBean;
 import com.wd.home.bean.HomeDrugsDetailBean;
 import com.wd.home.bean.HomeDrugsKnowledgeBean;
@@ -79,13 +83,21 @@ public class HomeDrugFragment extends BaseFragment implements IHomeContract.IVie
         rvLeft.setAdapter(adapter);
         adapter.Click(new HomeDrugLeftAdapter.onClick() {
             @Override
-            public void setClick(int id) {
+            public void setClick(int id, int position) {
+                //点击变色
+                for (HomeFindDrugsCategoryBean.ResultBean bean:list){
+                    bean.setCheck(false);
+                }
+                list.get(position).setCheck(true);
                 BasePresenter presenter = getPresenter();
                 if (presenter instanceof IHomeContract.IPresenter) {
                     ((IHomeContract.IPresenter)presenter).getHomeDrugsKnowledge(id,1,12);
                 }
+                adapter.notifyDataSetChanged();
             }
+
         });
+
     }
 
     @Override
@@ -97,8 +109,11 @@ public class HomeDrugFragment extends BaseFragment implements IHomeContract.IVie
         rvRight.setAdapter(adapter);
         adapter.Click(new HomeDrugRightAdapter.onClick() {
             @Override
-            public void setClick(int id) {
-
+            public void setClick(int id, String name) {
+                Intent intent = new Intent(getActivity(), HomeDrugDetailActivity.class);
+                intent.putExtra("drugId",id);
+                intent.putExtra("name",name);
+                startActivity(intent);
             }
         });
     }
@@ -107,6 +122,17 @@ public class HomeDrugFragment extends BaseFragment implements IHomeContract.IVie
     public void onHomeDrugsDetail(HomeDrugsDetailBean homeDrugsDetailBean) {
 
     }
+
+    @Override
+    public void onDetailCollection(HomeDetailCollectionBean homeDetailCollectionBean) {
+
+    }
+
+    @Override
+    public void onDetailCanelCollection(HomeDetailDeleteBean homeDetailDeleteBean) {
+
+    }
+
     @Override
     public void onBanner(HomeBannerBean homeBannerBean) {
 

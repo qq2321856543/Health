@@ -55,6 +55,15 @@ public class HomeDepartmentBean {
         private int id;
         private String pic;
         private int rank;
+        private boolean isCheck=false;
+
+        public boolean isCheck() {
+            return isCheck;
+        }
+
+        public void setCheck(boolean check) {
+            isCheck = check;
+        }
 
         public String getDepartmentName() {
             return departmentName;

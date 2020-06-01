@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.wd.common.base.util.Base.BaseAcitvity;
 import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.common.base.util.util.MD;
@@ -29,6 +31,7 @@ import com.wd.login.activity.bean.LoginSendEmailCodeBean;
 import com.wd.login.activity.bean.LogincheckCodeBean;
 import com.wd.login.activity.contract.ILoginContract;
 import com.wd.login.activity.presenter.LoginPresenter;
+import com.wd.login.activity.util.Constants;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -144,6 +147,18 @@ public class LoginLonginActivity extends BaseAcitvity implements ILoginContract.
                 }
             }
         });
+    }
+    //微信登录
+    @OnClick(R2.id.iv_login_wechat)
+    public void onClick(){
+        Constants.wx_api = WXAPIFactory.createWXAPI(getApplicationContext(), Constants.APP_ID, true);
+        Constants.wx_api.registerApp(Constants.APP_ID);
+
+        final SendAuth.Req req = new SendAuth.Req();
+        req.scope = "snsapi_userinfo";
+        req.state = "wechat_sdk_demo_test";
+        Constants.wx_api.sendReq(req);
+
     }
     @Override
     public void onLogin(LoginLoginBean loginLoginBean) {

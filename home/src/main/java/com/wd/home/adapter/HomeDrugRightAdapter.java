@@ -55,7 +55,7 @@ public class HomeDrugRightAdapter extends RecyclerView.Adapter<RecyclerView.View
         ((ViewHolder) viewHolder).rl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                monClick.setClick(id);
+                monClick.setClick(id,name);
             }
         });
     }
@@ -63,7 +63,7 @@ public class HomeDrugRightAdapter extends RecyclerView.Adapter<RecyclerView.View
     private onClick monClick;
 
     public interface onClick {
-        void setClick(int id);
+        void setClick(int id,String name);
     }
 
     public void Click(onClick onClick) {

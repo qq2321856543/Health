@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.HomeDiseasesDetailActivity">
+    <RelativeLayout
+        android:id="@+id/rl1"
+        android:textSize="14sp"
+        android:layout_width="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="@android:color/background_light"
+        android:layout_height="wrap_content"
+        >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/iv_home_head"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="32dp"
+            fresco:placeholderImage="@mipmap/ic_launcher"
+            android:layout_marginBottom="20dp"
+            fresco:roundAsCircle="true" />
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="20dp"
+            android:src="@mipmap/home_message_null" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_1"
+        android:layout_below="@id/rl1"
+        android:background="@android:color/holo_red_dark"
+        android:text="本模块知识只供参考,如有需要,请在医生指导下使用"
+        android:textColor="@android:color/background_light"
+        android:textSize="10sp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"/>
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_below="@id/tv_1"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="20dp"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@id/tv_name"
+        android:id="@+id/rv_bz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+</RelativeLayout>

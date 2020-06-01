@@ -53,6 +53,15 @@ public class HomePlateListBean {
         private int id;
         private String name;
         private int sort;
+        private boolean isCheck=false;
+
+        public boolean isCheck() {
+            return isCheck;
+        }
+
+        public void setCheck(boolean check) {
+            isCheck = check;
+        }
 
         public int getId() {
             return id;
