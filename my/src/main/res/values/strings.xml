@@ -43,6 +43,65 @@
     <string name="bangdingyinhangka">绑定银行卡</string>
     <!--以下是当前问诊页-->
     <string name="zanwudangqianwenzhen">当前暂无问诊</string>
+    <string name="jixuwenzhen">继续问诊</string>
+    <string name="jieshuwenzhen">结束问诊</string>
+
     <!--以下是历史问诊页-->
     <string name="zanwulishiwenzhen">无历史问诊</string>
+    <!--以下是档案页-->
+    <string name="meiyoudangan">您还没有档案哦</string>
+    <string name="tianjiadangan">添加</string>
+    <string name="zhuyaozhnegzhuang">[主要症状]</string>
+    <string name="xianbingshi">[现病史]</string>
+    <string name="jiwangbingshi">[既往病史]</string>
+    <string name="zhiliaojingli">[治疗经历]</string>
+    <string name="xianggunatupian">[相关图片]</string>
+    <string name="shanchu">删除</string>
+    <string name="bianji">编辑</string>
+    <!--以下是添加档案页-->
+    <string name="shuruzhuyaozhnegzhuang">请输入您的主要症状</string>
+    <string name="shuruxiangxibingzhuang">请详细输入您的当前病状</string>
+    <string name="shurujiwangbingshi">请输入您的既往病史</string>
+    <string name="shuruyiyuanmingcheng">请输入医院名称</string>
+    <string name="xuanzekaishishijian">请选择开始时间</string>
+    <string name="xuanzejieshushijian">请选择结束时间</string>
+    <string name="shuruzhiliaoguocheng">请输入治疗过程</string>
+    <string name="baocun">保存</string>
+    <!--以下是收藏页-->
+    <string name="meiyoushoucang">收藏空空如也</string>
+    <!--以下是被采纳建议页-->
+    <string name="meiyoubeicainajianyi">您还没有被采纳建议哦</string>
+    <!--以下是购买的视频页-->
+    <string name="goumaideshipin">购买的视频</string>
+    <string name="meiyougoumaideshipin">您还没有购买过视频!</string>
+    <!--以下是我的病友圈页-->
+    <string name="meiyoubingyouquan">您还没有发布过病友圈</string>
+    <string name="chakanpingjia">查看评论>></string>
+    <!--以下是我的病友圈评论页-->
+    <string name="pinglunliebiao">评论列表</string>
+    <string name="meiyoupinglun">暂无评论!</string>
+    <!--以下是我的关注页-->
+    <string name="meiyouguanzhu">您暂无任何关注信息</string>
+    <!--以下是我的任务页-->
+    <string name="lianxuqiandao">注:连续签到H币将会积累</string>
+    <string name="qiandaotiao">签到条</string>
+    <string name="meirirenwu">每日任务</string>
+    <string name="yicixingrenwu">一次性任务</string>
+    <string name="yiwancheng">已完成</string>
+    <string name="weiwancheng">未完成</string>
+    <string name="linghbi">领H币</string>
+    <string name="shoufabingyouquan">首发病友圈</string>
+    <string name="bingyouquanshouping">病友圈首评</string>
+    <string name="wanshanwodexinxi">完善我的信息</string>
+    <string name="canyujiankangpingce">参与健康评测</string>
+    <!--以下是修改昵称页-->
+    <string name="shezhinicheng">设置昵称</string>
+    <string name="qingshurunicheng">请输入昵称</string>
+    <string name="wancheng">完成</string>
+    <!--以下是修改性别页-->
+    <string name="xuanzexingbie">选择性别</string>
+    <string name="nan">男</string>
+    <string name="nv">女</string>
+    <!--以下是完善信息页-->
+    <string name="wodetizheng">我的体征</string>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.UserArchivesActivity">
+    tools:context=".activity.UserArchivesOneMainActivity">
     <RelativeLayout
         android:id="@+id/rl1"
         android:layout_width="match_parent"
@@ -26,8 +26,6 @@
             android:textStyle="bold"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
-
-
     <RelativeLayout
         android:id="@+id/rl2"
         android:layout_below="@id/rl1"
@@ -36,8 +34,36 @@
         android:layout_height="5dp">
 
     </RelativeLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/lly_history_nomessage"
+        android:visibility="gone">
+        <ImageView
+            android:layout_width="@dimen/dp150"
+            android:layout_height="@dimen/dp150"
+            android:src="@mipmap/no_message"
+            />
+        <TextView
+            android:layout_marginBottom="@dimen/dp56"
+            android:layout_width="@dimen/dp75"
+            android:layout_height="@dimen/dp25"
+            android:text="@string/zanwulishiwenzhen"
+            android:textSize="@dimen/sp14"
+            />
+        <Button
+            android:id="@+id/bt_add"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:background="#3086E9"
+            android:textColor="#FDFDFE"
+            android:text="添加"/>
+    </LinearLayout>
     <RelativeLayout
+        android:id="@+id/rl3"
         android:layout_below="@id/rl2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -50,7 +76,7 @@
             android:textColor="#3087ea"
             android:textSize="12sp"
             android:text="[主要症状]"/>
-        <EditText
+        <TextView
             android:id="@+id/et_zheng"
             android:layout_below="@id/tv_zheng"
             android:layout_width="match_parent"
@@ -60,9 +86,8 @@
             android:textSize="12sp"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:textColor="#999999"
-            android:textColorHint="#999999"
-            android:hint="请输入您的主要症状"/>
+            android:textColor="#030102"
+            />
         <TextView
             android:id="@+id/tv_xian"
             android:layout_below="@id/et_zheng"
@@ -73,7 +98,7 @@
             android:textColor="#3087ea"
             android:textSize="12sp"
             android:text="[现病史]"/>
-        <EditText
+        <TextView
             android:id="@+id/et_xian"
             android:layout_below="@id/tv_xian"
             android:layout_width="match_parent"
@@ -83,9 +108,9 @@
             android:textSize="12sp"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:textColor="#999999"
-            android:textColorHint="#999999"
-            android:hint="请输入您当前病状"/>
+            android:textColor="#030102"
+
+            />
         <TextView
             android:id="@+id/tv_wang"
             android:layout_below="@id/et_xian"
@@ -96,7 +121,7 @@
             android:textColor="#3087ea"
             android:textSize="12sp"
             android:text="[既往病史]"/>
-        <EditText
+        <TextView
             android:id="@+id/et_wang"
             android:layout_below="@id/tv_wang"
             android:layout_width="match_parent"
@@ -106,9 +131,9 @@
             android:textSize="12sp"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:textColor="#999999"
-            android:textColorHint="#999999"
-            android:hint="请输入您既往病史"/>
+            android:textColor="#030102"
+
+            />
         <TextView
             android:id="@+id/tv_zui"
             android:layout_below="@id/et_wang"
@@ -118,78 +143,43 @@
             android:layout_marginLeft="15dp"
             android:textColor="#3087ea"
             android:textSize="12sp"
-            android:text="[最近一次治疗经历]"/>
-        <EditText
+            android:text="[治疗经历]"/>
+        <TextView
             android:id="@+id/et_zui"
             android:layout_below="@id/tv_zui"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/tv_zheng"
             android:layout_marginRight="15dp"
             android:textSize="12sp"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:textColor="#999999"
-            android:textColorHint="#999999"
-            android:hint="请输入医院名称"/>
-        <EditText
-            android:id="@+id/et_kai"
-            android:layout_below="@id/et_zui"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/tv_zheng"
-            android:layout_marginRight="15dp"
-            android:textSize="12sp"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:textColor="#333333"
-            android:textColorHint="#333333"
-            android:hint="请选择治疗开始时间"/>
-        <ImageView
-            android:id="@+id/iv_kai"
-            android:layout_alignParentRight="true"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_below="@id/et_zui"
-            android:layout_marginRight="20dp"
-            android:src="@mipmap/circle_icon_drop_down_n"/>
-        <EditText
-            android:id="@+id/et_jie"
-            android:layout_below="@id/et_kai"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/tv_zheng"
-            android:layout_marginRight="15dp"
-            android:textSize="12sp"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:textColor="#333333"
-            android:textColorHint="#333333"
-            android:hint="请选择治疗结束时间"/>
-        <ImageView
-            android:id="@+id/iv_jie"
-            android:layout_alignParentRight="true"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_below="@id/et_kai"
-            android:layout_marginRight="20dp"
-            android:src="@mipmap/circle_icon_drop_down_n"/>
-        <EditText
-            android:id="@+id/et_guo"
-            android:layout_below="@id/et_jie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/tv_zheng"
-            android:layout_marginRight="15dp"
-            android:textSize="12sp"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:textColor="#999999"
-            android:textColorHint="#999999"
-            android:hint="请输入治疗过程"/>
+            android:textColor="#030102"
+            android:text="北京天坛医院"/>
+            <TextView
+                android:id="@+id/tv_shijian"
+                android:layout_alignBottom="@id/et_zui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:text="123123"
+                android:textSize="12sp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:textColor="#030102"/>
         <TextView
-            android:id="@+id/tv_tu"
-            android:layout_below="@id/et_guo"
+            android:id="@+id/tv_str"
+            android:layout_below="@id/et_zui"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#030102"
+            android:layout_alignLeft="@id/et_zui"
+            android:layout_marginRight="15dp"
+            android:text="都是垃圾发垃圾卡了附件是昆德拉反馈"/>
+        <TextView
+            android:id="@+id/tv_image"
+            android:layout_below="@id/tv_str"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -197,48 +187,44 @@
             android:textColor="#3087ea"
             android:textSize="12sp"
             android:text="[相关图片]"/>
-        <TextView
-            android:id="@+id/tv"
-            android:layout_below="@id/tv_tu"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="16dp"
-            android:gravity="center_vertical"
-            android:background="#F1F1F1"
-            android:textColor="#333333"
-            android:textSize="10sp"
-            android:text="最多可添加6张图片;长安为图片排序"/>
+
+
         <LinearLayout
             android:id="@+id/ll"
-            android:layout_alignBottom="@id/iv_jia"
-            android:layout_width="wrap_content"
-            android:orientation="horizontal"
-            android:layout_height="72dp"
+            android:layout_below="@id/tv_image"
+            android:layout_width="320dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
             android:layout_marginLeft="15dp">
 
         </LinearLayout>
-        <ImageView
-            android:id="@+id/iv_jia"
-            android:layout_below="@id/tv"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="15dp"
-            android:layout_toRightOf="@id/ll"
-            android:src="@mipmap/add"/>
-        <TextView
-            android:id="@+id/tv_ok"
-            android:layout_width="300dp"
-            android:layout_height="36dp"
-            android:layout_below="@id/ll"
-            android:gravity="center"
-            android:textSize="14sp"
-            android:layout_marginTop="20dp"
-            android:background="#8151F1"
-            android:textColor="#ffffff"
-            android:layout_centerHorizontal="true"
-            android:text="保存"/>
-    </RelativeLayout>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_height="100dp">
+            <Button
+                android:id="@+id/bt_left"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:text="删除"
+                android:layout_gravity="center"
+                android:layout_marginRight="50dp"
+                android:background="#989898"
+                android:textColor="#FDFDFE"/>
+            <Button
+                android:id="@+id/bt_right"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:text="编辑"
+                android:layout_gravity="center"
+                android:background="#3086E9"
+                android:textColor="#FDFDFE"/>
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

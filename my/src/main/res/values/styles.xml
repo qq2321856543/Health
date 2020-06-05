@@ -1,0 +1,9 @@
+<resources>
+    <style name="def_sign">
+    <item name="sign_in_bg_color">#999999</item>
+    <item name="sign_in_pb_color">@android:color/holo_blue_bright</item>\
+    <item name="sign_in_check_color">@android:color/white</item>
+    <item name="sign_in_text_color">@android:color/black</item>
+    <item name="sign_in_text_siz">12sp</item>
+    </style>
+</resources>

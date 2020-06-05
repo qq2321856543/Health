@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="#FDFDFE"
     tools:context=".activity.SetActivity">
     <LinearLayout
         android:layout_marginTop="@dimen/dp40"

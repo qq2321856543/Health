@@ -181,7 +181,7 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_Message.IView
     }
     public void sendMess(String name,String str){
                 //创建跨应用会话
-        Conversation con = Conversation.createSingleConversation("HaNX8z3254402544", "b5f102cc307091e167ce52e0");
+        Conversation con = Conversation.createSingleConversation(name, "b5f102cc307091e167ce52e0");
         MessageContent content = new TextContent(str);
         //创建一条消息
         Message message = con.createSendMessage(content);

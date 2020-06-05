@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp80"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp20"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="@dimen/dp20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_task_item_taskname"
+            android:textSize="@dimen/sp12" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/but_task_item"
+            android:layout_width="@dimen/dp70"
+            android:layout_height="@dimen/dp40"
+            android:background="@drawable/round_gray"
+            android:textSize="@dimen/sp12" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp20"
+        android:text="+10"
+        android:textColor="@color/blue"
+        android:id="@+id/tv_task_item_hbi"
+        android:textSize="@dimen/sp12" />
+</LinearLayout>
