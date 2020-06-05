@@ -60,7 +60,7 @@
         />
         <EditText
             android:layout_width="120dp"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:textColor="#3087ea"
             android:id="@+id/et_recharge_money"
             android:background="@null"

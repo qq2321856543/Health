@@ -19,6 +19,7 @@ import com.wd.login.activity.bean.LoginLoginBean;
 import com.wd.login.activity.bean.LoginRegisterBean;
 import com.wd.login.activity.bean.LoginResetPwdBean;
 import com.wd.login.activity.bean.LoginSendEmailCodeBean;
+import com.wd.login.activity.bean.LoginWxBean;
 import com.wd.login.activity.bean.LogincheckCodeBean;
 import com.wd.login.activity.contract.ILoginContract;
 import com.wd.login.activity.presenter.LoginPresenter;
@@ -153,6 +154,11 @@ public class LoginRegisterActivity extends BaseAcitvity implements ILoginContrac
 
     @Override
     public void onResetPwd(LoginResetPwdBean loginResetPwdBean) {
+
+    }
+
+    @Override
+    public void onWxLogin(LoginWxBean loginWxBean) {
 
     }
 

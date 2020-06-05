@@ -2,6 +2,7 @@ package com.wd.wallet.presenter;
 
 import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.common.base.util.Base.IBaseView;
+import com.wd.wallet.bean.WalletDoctorBean;
 import com.wd.wallet.bean.WalletRecordBean;
 import com.wd.wallet.bean.WalletUserBean;
 import com.wd.wallet.contract.WalletContract;
@@ -48,6 +49,20 @@ public class WalletPresenter extends BasePresenter implements WalletContract.IPr
                 if(view instanceof WalletContract.IView){
                     WalletContract.IView iView= (WalletContract.IView) view;
                     iView.onRecord(walletRecordBean);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getDoctor(int deptId, int condition, int page, int count) {
+        model.onGetDoctor(deptId, condition, page, count, new WalletContract.IModel.IDoctorCallBack() {
+            @Override
+            public void onDoctor(WalletDoctorBean walletDoctorBean) {
+                IBaseView view = getView();
+                if(view instanceof WalletContract.IView){
+                    WalletContract.IView iView= (WalletContract.IView) view;
+                    iView.onDoctor(walletDoctorBean);
                 }
             }
         });

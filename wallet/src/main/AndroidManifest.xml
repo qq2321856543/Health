@@ -3,7 +3,10 @@
     package="com.wd.wallet">
 
     <application>
-        <activity android:name=".activity.WalletWithdrawActivity"></activity>
+        <activity android:name=".activity.WalletPayCompleteActivity"></activity>
+        <activity android:name=".activity.WalletWithdrawCompleteActivity" />
+        <activity android:name=".activity.WithdrawRecordActivity" />
+        <activity android:name=".activity.WalletWithdrawActivity" />
         <activity android:name=".activity.WalletRechargeActivity" />
         <activity android:name=".activity.WalletActivity">
 

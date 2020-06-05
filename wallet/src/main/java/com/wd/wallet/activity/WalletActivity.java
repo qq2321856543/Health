@@ -17,6 +17,7 @@ import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.wallet.R;
 import com.wd.wallet.R2;
 import com.wd.wallet.adapter.WalletRecordAdapter;
+import com.wd.wallet.bean.WalletDoctorBean;
 import com.wd.wallet.bean.WalletRecordBean;
 import com.wd.wallet.bean.WalletUserBean;
 import com.wd.wallet.contract.WalletContract;
@@ -44,6 +45,7 @@ public class WalletActivity extends BaseAcitvity implements WalletContract.IView
     String str = "http://www.17qq.com/img_qqtouxiang/6062256.jpeg";
     @BindView(R2.id.iv_bg)
     SimpleDraweeView ivBg;
+    private WalletRecordAdapter adapter;
 
     @Override
     protected BasePresenter initPresenter() {
@@ -78,6 +80,8 @@ public class WalletActivity extends BaseAcitvity implements WalletContract.IView
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(WalletActivity.this, WalletWithdrawActivity.class);
+                String string = tvWalletMoney.getText().toString();
+                intent.putExtra("myMoney",string);
                 startActivity(intent);
             }
         });
@@ -100,9 +104,14 @@ public class WalletActivity extends BaseAcitvity implements WalletContract.IView
     public void onRecord(WalletRecordBean walletRecordBean) {
         List<WalletRecordBean.ResultBean> list = walletRecordBean.getResult();
         LinearLayoutManager manager = new LinearLayoutManager(WalletActivity.this, RecyclerView.VERTICAL, false);
-        WalletRecordAdapter adapter = new WalletRecordAdapter(this, list);
+        adapter = new WalletRecordAdapter(this, list);
         rvWallet.setLayoutManager(manager);
         rvWallet.setAdapter(adapter);
+
+    }
+
+    @Override
+    public void onDoctor(WalletDoctorBean walletDoctorBean) {
 
     }
 

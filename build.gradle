@@ -6,6 +6,7 @@ buildscript {
         jcenter()
         maven { url "https://jitpack.io" }
         mavenCentral()
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
@@ -19,6 +20,10 @@ buildscript {
 
 allprojects {
     repositories {
+        // 支付宝
+        flatDir {
+            dirs 'libs'
+        }
         google()
         jcenter()
         maven { url "https://jitpack.io" }

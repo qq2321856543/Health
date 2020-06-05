@@ -14,5 +14,6 @@
     <android.support.design.widget.TabLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="@mipmap/home_tablayout_bg"
         android:id="@+id/tb_home"></android.support.design.widget.TabLayout>
 </LinearLayout>
