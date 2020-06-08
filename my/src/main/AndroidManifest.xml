@@ -3,7 +3,8 @@
     package="com.wd.my">
 
     <application>
-        <activity android:name=".activity.TaskActivity"></activity>
+        <activity android:name=".activity.IDcardActivity"></activity>
+        <activity android:name=".activity.TaskActivity" />
         <activity android:name=".activity.UserArchivesOneMainActivity" />
         <activity android:name=".activity.UserArchivesActivity" />
         <activity android:name=".activity.MyMyMainActivity" />

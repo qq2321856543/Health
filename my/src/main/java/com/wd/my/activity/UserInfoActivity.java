@@ -155,7 +155,8 @@ public class UserInfoActivity extends BaseAcitvity {
         } else if (view.getId() == R.id.iv_userinfo_bindwx) {
 
         } else if (view.getId() == R.id.iv_userinfo_certification) {
-
+            Intent intent = new Intent(UserInfoActivity.this, IDcardActivity.class);
+            startActivity(intent);
         } else if (view.getId() == R.id.iv_userinfo_bindyhk) {
 
         }
