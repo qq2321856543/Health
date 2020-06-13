@@ -3,7 +3,10 @@
     package="com.wd.patient">
 
     <application>
-        <activity android:name=".activity.PatientParticularsActivity"></activity>
+        <activity android:name=".activity.WritePatientActivity"
+                        android:windowSoftInputMode="stateHidden|stateAlwaysHidden"></activity>
+        <activity android:name=".activity.UserPatientActivity" />
+        <activity android:name=".activity.PatientParticularsActivity" />
         <activity android:name=".activity.PatientSearchActivity" />
 
         <meta-data

@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,13 +22,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.app.hubert.guide.NewbieGuide;
 import com.app.hubert.guide.core.Controller;
 import com.app.hubert.guide.model.GuidePage;
 import com.bumptech.glide.Glide;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.wd.common.base.util.Base.BaseAcitvity;
+import com.wd.common.base.util.Base.BaseApplication;
 import com.wd.common.base.util.Base.BasePresenter;
+import com.wd.common.base.util.util.SPUtils;
 import com.wd.patient.R;
 import com.wd.patient.R2;
 import com.wd.patient.adapter.PingLunAdapter;
@@ -126,6 +130,7 @@ public class PatientParticularsActivity extends BaseAcitvity implements PatientC
 
     @Override
     protected void initData() {
+
         //点击评论
         ping.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,6 +223,7 @@ public class PatientParticularsActivity extends BaseAcitvity implements PatientC
     }
     //popwindow
     private void initTopPop() {
+
         popView = LayoutInflater.from(this).inflate(R.layout.pop_ping_lun, null, false);
         popupWindow = new PopupWindow(popView,
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -225,6 +231,14 @@ public class PatientParticularsActivity extends BaseAcitvity implements PatientC
 
         re = popView.findViewById(R.id.re);
         nei = popView.findViewById(R.id.nei);
+
+        //设置评论列表适配器
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        re.setLayoutManager(linearLayoutManager);
+        pingLunAdapter = new PingLunAdapter(this);
+        re.setAdapter(pingLunAdapter);
+
+
         //点击背景消失当前diglog
         popView.findViewById(R.id.cha_zi).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,6 +280,8 @@ public class PatientParticularsActivity extends BaseAcitvity implements PatientC
                     public void onNext(PublishCommentBean publishCommentBean) {
                         if (publishCommentBean != null) {
                             Toast.makeText(PatientParticularsActivity.this, publishCommentBean.getMessage(), Toast.LENGTH_SHORT).show();
+                            showComment();
+                            pingLunAdapter.notifyDataSetChanged();
                         }
                     }
 
@@ -283,10 +299,7 @@ public class PatientParticularsActivity extends BaseAcitvity implements PatientC
 
     //展示评论列表
     private void showComment() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        re.setLayoutManager(linearLayoutManager);
-        pingLunAdapter = new PingLunAdapter(this);
-        re.setAdapter(pingLunAdapter);
+
         PatientApis.createrRetrofit().showComment(sickCircleId, 1, 30)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -318,7 +331,11 @@ public class PatientParticularsActivity extends BaseAcitvity implements PatientC
         pingLunAdapter.setOnclckTou(new PingLunAdapter.OnClickTou() {
             @Override
             public void onck(String a, int b,String name) {
-                Toast.makeText(PatientParticularsActivity.this, name, Toast.LENGTH_SHORT).show();
+                ARouter.getInstance().build("/patient/userPatient")
+                        .withString("a",a)
+                        .withInt("b",b)
+                        .withString("name",name)
+                        .navigation();
 
             }
         });

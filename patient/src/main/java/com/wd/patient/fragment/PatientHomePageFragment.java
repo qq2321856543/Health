@@ -16,6 +16,7 @@ import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.patient.R;
 import com.wd.patient.R2;
 import com.wd.patient.activity.PatientSearchActivity;
+import com.wd.patient.activity.WritePatientActivity;
 import com.wd.patient.adapter.ButtonAdapter;
 import com.wd.patient.adapter.KeLieAdapter;
 import com.wd.patient.bean.BingXiangBean;
@@ -63,6 +64,8 @@ public class PatientHomePageFragment extends BaseFragment implements PatientCont
     ImageView search;
     @BindView(R2.id.patient_fragment_etsearch)
     EditText etSearch;
+    @BindView(R2.id.patient_fragment_write)
+    ImageView write;
     private int juli = 0;
     private ButtonAdapter buttonAdapter;
     private KeLieAdapter keLieAdapter;
@@ -111,7 +114,12 @@ public class PatientHomePageFragment extends BaseFragment implements PatientCont
 
     @Override
     protected void initData() {
-
+        write.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), WritePatientActivity.class));
+            }
+        });
         presenter = getPresenter();
         if (presenter instanceof PatientPresenter) {
             Log.i("lcc", "病友圈");

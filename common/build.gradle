@@ -102,4 +102,6 @@ dependencies {
     api 'com.bigkoo:ConvenientBanner:2.1.4'
     //阴影
     api 'io.github.meetsl:SCardView:1.0'
+
+
 }

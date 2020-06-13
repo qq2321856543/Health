@@ -50,4 +50,5 @@ dependencies {
     implementation 'com.github.huburt-Hu:NewbieGuide:v2.4.0'
     implementation 'com.jakewharton:butterknife:9.0.0-rc2'
     annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc2'
+    implementation 'com.github.wildma:PictureSelector:1.1.1'
 }
