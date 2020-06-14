@@ -10,7 +10,7 @@ import android.support.v4.view.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bawei.video.VideoFragment;
+import com.bawei.video.fragment.VideoFragment;
 import com.wd.common.base.util.Base.BaseAcitvity;
 import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.home.R;
