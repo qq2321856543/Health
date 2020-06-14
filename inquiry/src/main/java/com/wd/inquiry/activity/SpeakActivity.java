@@ -115,14 +115,18 @@ public class SpeakActivity extends BaseAcitvity implements ICoolor_Message.IView
         //获取历史消息
         MessageList();
         String userName = getIntent().getStringExtra("UserName");
+        imname=userName;
         String doctorname = getIntent().getStringExtra("doctorname");
-        try {
-            String Jname = RsaCoder.decryptByPublicKey(userName);
-            imname=Jname;
-            Log.i("ooo",""+imname);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (userName.length()>25){
+            try {
+                String Jname = RsaCoder.decryptByPublicKey(userName);
+                imname=Jname;
+                Log.i("ooo",""+imname);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
         //控件赋值
         tv_name.setText(doctorname);
 //        BasePresenter presenter = getPresenter();
