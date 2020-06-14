@@ -3,7 +3,12 @@
     package="com.wd.login">
 
     <application>
-        <activity android:name=".activity.wxapi.WXEntryActivity"></activity>
+        <activity android:name=".activity.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity="com.wd.login"
+            android:theme="@android:style/Theme.NoDisplay"
+       ></activity>
         <activity android:name=".activity.activity.GuidePageActivity" />
         <activity android:name=".activity.activity.LoginSetNewPassWordActivity" />
         <activity android:name=".activity.activity.LoginForgetPassWordActivity" />

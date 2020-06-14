@@ -28,30 +28,25 @@
             android:textColor="@android:color/white"
             android:text="我的钱包"
             android:layout_centerHorizontal="true"/>
-       <RelativeLayout
-           android:id="@+id/rl"
-           android:layout_width="116dp"
-           android:layout_below="@id/tv"
-           android:layout_centerHorizontal="true"
-           android:layout_marginTop="30dp"
-           android:layout_height="wrap_content">
+
            <com.facebook.drawee.view.SimpleDraweeView
                android:layout_width="116dp"
                android:layout_height="116dp"
-
                fresco:roundAsCircle="true"
+               android:layout_marginTop="30dp"
                android:id="@+id/iv_bg"
-               android:layout_centerInParent="true"
-               android:background="@android:color/white"
+               android:layout_below="@id/tv"
+                android:layout_centerHorizontal="true"
+              android:background="@drawable/background_cricle"
                />
+
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:layout_marginTop="20dp"
-               android:textSize="44sp"
+               android:layout_marginTop="100dp"
+               android:textSize="22sp"
                android:textColor="#3086E9"
                android:textStyle="bold"
-               android:text="1500"
                android:id="@+id/tv_wallet_money"
                android:layout_centerHorizontal="true"/>
            <TextView
@@ -65,12 +60,12 @@
                android:layout_marginBottom="12dp"
                android:layout_centerHorizontal="true"
                android:layout_below="@id/tv_wallet_money"/>
-       </RelativeLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="满2000H币可提现"
-            android:layout_below="@id/rl"
+            android:layout_below="@id/iv_bg"
             android:layout_marginTop="10dp"
             android:textSize="10sp"
             android:id="@+id/tv2"
@@ -81,11 +76,12 @@
             android:layout_height="30dp"
             android:textColor="#3086E9"
             android:textSize="14sp"
+            android:background="@drawable/wallet_bt_wallet"
             android:text="提现"
             android:id="@+id/bt_wallet_withdraw"
             android:layout_marginTop="24dp"
             android:layout_marginLeft="70dp"
-            android:background="@drawable/wallet_bt"
+
             android:layout_below="@id/tv2"
             />
         <Button
@@ -98,7 +94,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="24dp"
            android:layout_marginRight="70dp"
-            android:background="@drawable/wallet_bt"
+            android:background="@drawable/wallet_bt_wallet"
             android:layout_below="@id/tv2"
             />
     </RelativeLayout>
@@ -117,7 +113,7 @@
             android:layout_width="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_below="@id/ll"
-            android:layout_marginTop="20dp"
+
             android:layout_marginRight="20dp"
             android:id="@+id/rv_wallet"
             android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>

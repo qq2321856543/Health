@@ -28,6 +28,7 @@ import com.wd.login.activity.bean.LoginLoginBean;
 import com.wd.login.activity.bean.LoginRegisterBean;
 import com.wd.login.activity.bean.LoginResetPwdBean;
 import com.wd.login.activity.bean.LoginSendEmailCodeBean;
+import com.wd.login.activity.bean.LoginWxBean;
 import com.wd.login.activity.bean.LogincheckCodeBean;
 import com.wd.login.activity.contract.ILoginContract;
 import com.wd.login.activity.presenter.LoginPresenter;
@@ -81,11 +82,13 @@ public class LoginLonginActivity extends BaseAcitvity implements ILoginContract.
     @Override
     protected BasePresenter initPresenter() {
         return new LoginPresenter(this);
+
     }
 
     @Override
     protected int getLayout() {
         return R.layout.activity_login_longin;
+
     }
 
     @Override
@@ -127,6 +130,7 @@ public class LoginLonginActivity extends BaseAcitvity implements ILoginContract.
                     String pwd = etLoginPwd.getText().toString();
                     try {
                         mpwd = RsaCoder.encryptByPublicKey(pwd);
+                        Log.i("MMM",mpwd+"");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -147,19 +151,29 @@ public class LoginLonginActivity extends BaseAcitvity implements ILoginContract.
                 }
             }
         });
+        ivLoginWechat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Constants.wx_api = WXAPIFactory.createWXAPI(getApplicationContext(), Constants.APP_ID, true);
+                Constants.wx_api.registerApp(Constants.APP_ID);
+                final SendAuth.Req req = new SendAuth.Req();
+                req.scope = "snsapi_userinfo";
+                req.state = "wechat_sdk_demo_test";
+                Constants.wx_api.sendReq(req);
+            }
+        });
     }
-    //微信登录
-    @OnClick(R2.id.iv_login_wechat)
-    public void onClick(){
-        Constants.wx_api = WXAPIFactory.createWXAPI(getApplicationContext(), Constants.APP_ID, true);
-        Constants.wx_api.registerApp(Constants.APP_ID);
-
-        final SendAuth.Req req = new SendAuth.Req();
-        req.scope = "snsapi_userinfo";
-        req.state = "wechat_sdk_demo_test";
-        Constants.wx_api.sendReq(req);
-
-    }
+//    //微信登录
+//    @OnClick(R2.id.iv_login_wechat)
+//    public void onClick(){
+//        Constants.wx_api = WXAPIFactory.createWXAPI(getApplicationContext(), Constants.APP_ID, true);
+//        Constants.wx_api.registerApp(Constants.APP_ID);
+//        final SendAuth.Req req = new SendAuth.Req();
+//        req.scope = "snsapi_userinfo";
+//        req.state = "wechat_sdk_demo_test";
+//        Constants.wx_api.sendReq(req);
+//
+//    }
     @Override
     public void onLogin(LoginLoginBean loginLoginBean) {
         String message = loginLoginBean.getMessage();
@@ -210,6 +224,11 @@ public class LoginLonginActivity extends BaseAcitvity implements ILoginContract.
 
     @Override
     public void onResetPwd(LoginResetPwdBean loginResetPwdBean) {
+
+    }
+
+    @Override
+    public void onWxLogin(LoginWxBean loginWxBean) {
 
     }
 

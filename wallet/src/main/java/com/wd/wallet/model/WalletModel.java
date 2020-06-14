@@ -1,6 +1,7 @@
 package com.wd.wallet.model;
 
 import com.wd.common.base.util.util.RetrofitUtil;
+import com.wd.wallet.bean.WalletDoctorBean;
 import com.wd.wallet.bean.WalletRecordBean;
 import com.wd.wallet.bean.WalletUserBean;
 import com.wd.wallet.contract.WalletContract;
@@ -65,6 +66,36 @@ public class WalletModel implements WalletContract.IModel {
                     public void onNext(WalletRecordBean walletRecordBean) {
                         if(iRecordCallBack!=null){
                             iRecordCallBack.onRecord(walletRecordBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void onGetDoctor(int deptId, int condition, int page, int count, IDoctorCallBack iDoctorCallBack) {
+        createrRetrofit().getDoctor(deptId, condition, page, count)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<WalletDoctorBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(WalletDoctorBean walletDoctorBean) {
+                        if(iDoctorCallBack!=null){
+                            iDoctorCallBack.onDoctor(walletDoctorBean);
                         }
                     }
 

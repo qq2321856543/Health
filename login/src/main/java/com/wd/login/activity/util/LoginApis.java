@@ -4,6 +4,7 @@ import com.wd.login.activity.bean.LoginLoginBean;
 import com.wd.login.activity.bean.LoginRegisterBean;
 import com.wd.login.activity.bean.LoginResetPwdBean;
 import com.wd.login.activity.bean.LoginSendEmailCodeBean;
+import com.wd.login.activity.bean.LoginWxBean;
 import com.wd.login.activity.bean.LogincheckCodeBean;
 
 import io.reactivex.Observable;
@@ -29,6 +30,9 @@ public interface LoginApis {
     @POST("health/user/v1/login")
     @FormUrlEncoded
     Observable<LoginLoginBean>getLogin(@Field("email")String email,@Field("pwd")String pwd);
+    //微信登录
+    @POST("health/user/v1/weChatLogin")
+    Observable<LoginWxBean>getWxLogin(@Query("wxCode")String code);
     @POST("health/user/v1/checkCode")
     @FormUrlEncoded
     Observable<LogincheckCodeBean>getCheckCode(@Field("email")String email,@Field("code")String code);

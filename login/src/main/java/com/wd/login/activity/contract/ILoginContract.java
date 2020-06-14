@@ -5,6 +5,7 @@ import com.wd.login.activity.bean.LoginLoginBean;
 import com.wd.login.activity.bean.LoginRegisterBean;
 import com.wd.login.activity.bean.LoginResetPwdBean;
 import com.wd.login.activity.bean.LoginSendEmailCodeBean;
+import com.wd.login.activity.bean.LoginWxBean;
 import com.wd.login.activity.bean.LogincheckCodeBean;
 
 /**
@@ -19,6 +20,7 @@ public  interface ILoginContract {
         void onLogin(LoginLoginBean loginLoginBean);
         void onCheckCode(LogincheckCodeBean logincheckCodeBean);
         void onResetPwd(LoginResetPwdBean loginResetPwdBean);
+        void onWxLogin(LoginWxBean loginWxBean);
     }
     interface IPresenter{
         void getSendEmailCode(String email);
@@ -26,6 +28,7 @@ public  interface ILoginContract {
         void getLogin(String email,String pwd);
         void getCheckCode(String email,String pwd);
         void getResetPwd(String email,String pwd1,String pwd2);
+        void getWxLogin(String code);
     }
     interface IModel{
         void onGetSendEmailCode(String email,ISendEmailCodeCallBack iSendEmailCodeCallBack);
@@ -33,6 +36,7 @@ public  interface ILoginContract {
         void onGetLogin(String email,String pwd,ILoginCallBack iLoginCallBack);
         void onGetCheckCode(String email,String pwd,ICheckCodeCallBack iCheckCodeCallBack);
         void onGetResetPwd(String email,String pwd1,String pwd2,IResetPwdCallBack iResetPwdCallBack);
+        void onGetWxLogin(String code,IWxLoinCallBack iWxLoinCallBack);
         interface ISendEmailCodeCallBack{
             void onSendEmailCode(LoginSendEmailCodeBean loginSendEmailCodeBean);
         }
@@ -47,6 +51,9 @@ public  interface ILoginContract {
         }
         interface IResetPwdCallBack{
             void onResetPwd(LoginResetPwdBean loginResetPwdBean);
+        }
+        interface IWxLoinCallBack{
+            void onWxLogin(LoginWxBean loginWxBean);
         }
     }
 }

@@ -6,6 +6,7 @@ import com.wd.login.activity.bean.LoginLoginBean;
 import com.wd.login.activity.bean.LoginRegisterBean;
 import com.wd.login.activity.bean.LoginResetPwdBean;
 import com.wd.login.activity.bean.LoginSendEmailCodeBean;
+import com.wd.login.activity.bean.LoginWxBean;
 import com.wd.login.activity.bean.LogincheckCodeBean;
 import com.wd.login.activity.contract.ILoginContract;
 import com.wd.login.activity.model.LoginModel;
@@ -93,6 +94,20 @@ public class LoginPresenter extends BasePresenter implements ILoginContract.IPre
                 if(view instanceof ILoginContract.IView){
                     ILoginContract.IView iView= (ILoginContract.IView) view;
                     iView.onResetPwd(loginResetPwdBean);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getWxLogin(String code) {
+        model.onGetWxLogin(code, new ILoginContract.IModel.IWxLoinCallBack() {
+            @Override
+            public void onWxLogin(LoginWxBean loginWxBean) {
+                IBaseView view = getView();
+                if(view instanceof ILoginContract.IView){
+                    ILoginContract.IView iView= (ILoginContract.IView) view;
+                    iView.onWxLogin(loginWxBean);
                 }
             }
         });

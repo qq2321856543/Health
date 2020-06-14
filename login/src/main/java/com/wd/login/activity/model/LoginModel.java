@@ -5,6 +5,7 @@ import com.wd.login.activity.bean.LoginLoginBean;
 import com.wd.login.activity.bean.LoginRegisterBean;
 import com.wd.login.activity.bean.LoginResetPwdBean;
 import com.wd.login.activity.bean.LoginSendEmailCodeBean;
+import com.wd.login.activity.bean.LoginWxBean;
 import com.wd.login.activity.bean.LogincheckCodeBean;
 import com.wd.login.activity.contract.ILoginContract;
 import com.wd.login.activity.util.LoginApis;
@@ -172,4 +173,36 @@ public class LoginModel implements ILoginContract.IModel{
                     }
                 });
     }
+
+    @Override
+    public void onGetWxLogin(String code, IWxLoinCallBack iWxLoinCallBack) {
+        createrRetrofit().getWxLogin(code)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<LoginWxBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(LoginWxBean loginWxBean) {
+                        if(iWxLoinCallBack!=null){
+                            iWxLoinCallBack.onWxLogin(loginWxBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+
 }

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/white"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_marginTop="10dp">
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_marginTop="20dp"
+           android:layout_height="wrap_content"
+           android:text="10-28"
+           android:textSize="16sp"
+           android:textColor="#333333"
+           android:id="@+id/tv_withdraw_record_item_month"/>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="2018"
+           android:textSize="12sp"
+           android:textColor="#999999"
+           android:layout_below="@id/tv_withdraw_record_item_month"
+           android:layout_marginTop="4dp"
+           android:layout_marginLeft="12dp"
+           android:id="@+id/tv_withdraw_record_item_year"/>
+       <ImageView
+           android:layout_width="20dp"
+           android:layout_height="20dp"
+           android:layout_marginLeft="45dp"
+           android:layout_marginTop="34dp"
+           android:id="@+id/iv_icon"
+           android:src="@mipmap/wallet_icon"/>
+
+       <ImageView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_marginLeft="14dp"
+
+           android:layout_toRightOf="@id/iv_icon"
+           android:background="@drawable/wallet_rl2"
+           />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="20元"
+           android:layout_marginTop="10dp"
+           android:id="@+id/tv_withdraw_record_item_money"
+           android:textSize="18sp"
+           android:layout_toRightOf="@id/iv_icon"
+           android:layout_marginLeft="36dp"
+           android:textColor="#d92109"/>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textColor="#3087ea"
+           android:textSize="14sp"
+           android:layout_toRightOf="@id/iv_icon"
+           android:text="已提现"
+           android:id="@+id/tv_withdraw_record_item_status"
+           android:layout_alignParentBottom="true"
+           android:layout_marginBottom="10dp"
+           android:layout_marginLeft="36dp"
+           />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textColor="#333333"
+           android:textSize="12sp"
+           android:layout_marginRight="10dp"
+           android:text="建设银行"
+           android:layout_toLeftOf="@id/tv_withdraw_record_item_num"
+           android:id="@+id/tv_withdraw_record_item_bank"
+           android:layout_alignParentBottom="true"
+           android:layout_marginBottom="10dp"
+           android:layout_marginLeft="36dp"
+           />
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textColor="#333333"
+           android:textSize="12sp"
+
+           android:text="尾号 8476"
+           android:layout_alignParentRight="true"
+           android:layout_alignParentBottom="true"
+           android:layout_marginBottom="10dp"
+           android:layout_marginRight="10dp"
+           android:id="@+id/tv_withdraw_record_item_num"
+
+           />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentRight="true"
+           android:layout_marginRight="10dp"
+           android:text="到账银行卡"
+           android:textSize="12sp"
+           android:textColor="#333333"
+           android:layout_marginBottom="8dp"
+           android:layout_above="@id/tv_withdraw_record_item_num"/>
+   </RelativeLayout>
+</RelativeLayout>

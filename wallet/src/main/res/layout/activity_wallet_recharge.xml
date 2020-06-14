@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".activity.WalletRechargeActivity">
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="16dp"
+        android:id="@+id/iv_recharge_back"
+        android:src="@mipmap/wallet_back"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:textSize="16sp"
+        android:id="@+id/tv"
+        android:textColor="#333333"
+        android:text="充值"
+        android:layout_centerHorizontal="true"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:orientation="vertical"
+        android:layout_below="@id/tv"
+        android:layout_marginTop="20dp"
+        android:id="@+id/ll"
+        android:background="#f2f2f2"></LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@id/ll"
+        android:layout_marginTop="54dp"
+        android:text="充值金额"
+        android:id="@+id/jin"
+        android:textColor="#333333"/>
+
+    <RelativeLayout
+        android:id="@+id/rl1"
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@id/jin"
+        android:layout_height="wrap_content">
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#333333"
+        android:textSize="72sp"
+        android:text="¥"
+        android:id="@+id/flag"
+        />
+        <EditText
+            android:layout_width="120dp"
+            android:inputType="numberDecimal"
+            android:textColor="#3087ea"
+            android:id="@+id/et_recharge_money"
+            android:background="@null"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/flag"
+            android:textSize="72sp"
+            android:layout_marginLeft="34dp"
+            android:layout_height="wrap_content" />
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+            android:textSize="12sp"
+        android:layout_above="@id/line"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="4dp"
+        android:layout_alignParentRight="true"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_below="@id/et_recharge_money"
+            android:layout_height="1dp"
+            android:background="#f2f2f2"
+            android:id="@+id/line"
+            />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:textSize="10sp"
+        android:textColor="#999999"
+        android:text="最低充值1元,1元可兑换10H币。"
+        android:layout_marginTop="10dp"
+        android:id="@+id/ti"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl1"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="选择充值方式"
+        android:textColor="#333333"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="50dp"
+        android:id="@+id/type"
+        android:textSize="14sp"
+        android:layout_below="@id/ti"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_pay"
+        android:layout_marginLeft="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_below="@id/type"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/iv_wx"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/wx" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textColor="#333333"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/iv_wx"
+            android:text="微信支付"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/iv_ali"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_below="@id/iv_wx"
+
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/ali" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_wx"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="24dp"
+            android:textColor="#333333"
+            android:layout_toRightOf="@id/iv_wx"
+            android:text="支付宝支付"
+            android:textSize="14sp" />
+
+        <RadioGroup
+            android:id="@+id/rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="13dp"
+            android:layout_marginRight="24dp"
+
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_wechat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/rb_ali"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+        </RadioGroup>
+    </RelativeLayout>
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="36dp"
+
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:layout_marginBottom="60dp"
+        android:id="@+id/bt_recharge"
+        android:text="充值"
+        android:background="@drawable/wallet_bt_wallet_recharge"
+       android:layout_alignParentBottom="true"/>
+</RelativeLayout>
