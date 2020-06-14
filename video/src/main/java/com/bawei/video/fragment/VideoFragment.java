@@ -212,7 +212,7 @@ public class VideoFragment extends BaseFragment implements HomePageContral.getVi
         BasePresenter presenter = getPresenter();
         if (presenter instanceof HomePagePresenter) {
             ((HomePagePresenter)presenter).getLeiMu();
-//            ((HomePagePresenter) presenter).getShiPin(2, 1, 20);
+            ((HomePagePresenter) presenter).getShiPin(2, 1, 20);
         }
     }
 
@@ -387,7 +387,7 @@ public class VideoFragment extends BaseFragment implements HomePageContral.getVi
         adapter.setOnClickGif(new VideoAdapter.OnClickGif() {
             @Override
             public void onck() {
-                Toast.makeText(getContext(), "暂停", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "暂停", Toast.LENGTH_SHORT).show();
                 jzVideo.goOnPlayOnPause();
                 jzVideo.onStatePause();
 
