@@ -1,13 +1,10 @@
 package com.wd.patient.fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,6 +16,7 @@ import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.patient.R;
 import com.wd.patient.R2;
 import com.wd.patient.activity.PatientSearchActivity;
+import com.wd.patient.activity.WritePatientActivity;
 import com.wd.patient.adapter.ButtonAdapter;
 import com.wd.patient.adapter.KeLieAdapter;
 import com.wd.patient.bean.BingXiangBean;
@@ -33,9 +31,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * @ProjectName: Health
@@ -68,9 +64,12 @@ public class PatientHomePageFragment extends BaseFragment implements PatientCont
     ImageView search;
     @BindView(R2.id.patient_fragment_etsearch)
     EditText etSearch;
+    @BindView(R2.id.patient_fragment_write)
+    ImageView write;
     private int juli = 0;
     private ButtonAdapter buttonAdapter;
     private KeLieAdapter keLieAdapter;
+    private BasePresenter presenter;
 
     @Override
     protected BasePresenter initPresenter() {
@@ -83,38 +82,55 @@ public class PatientHomePageFragment extends BaseFragment implements PatientCont
     }
 
     @Override
-    protected void initView(View view) {
-
+    public void onResume() {
+        super.onResume();
         //注册EventBus
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
+    }
 
-        BasePresenter presenter = getPresenter();
-        if (presenter instanceof PatientPresenter) {
-            ((PatientPresenter) presenter).getPatient(2, 1, 10);
-            ((PatientPresenter) presenter).getKeLie();
-        }
+    @Override
+    protected void initView(View view) {
+
+
+        LinearLayoutManager two = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        re.setLayoutManager(two);
+        buttonAdapter = new ButtonAdapter(getActivity());
+        re.addItemDecoration(new SpacesItemDecoration(15));
+        re.setAdapter(buttonAdapter);
+
+
+
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+        reOne.setLayoutManager(linearLayoutManager);
+        keLieAdapter = new KeLieAdapter(getActivity());
+        reOne.setAdapter(keLieAdapter);
+
     }
 
 
 
     @Override
     protected void initData() {
+        write.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), WritePatientActivity.class));
+            }
+        });
+        presenter = getPresenter();
+        if (presenter instanceof PatientPresenter) {
+            Log.i("lcc", "病友圈");
+            ((PatientPresenter) presenter).getKeLie();
+        }
+
         //默认第二个布局消失
         topOne.setVisibility(View.VISIBLE);
         topTwo.setVisibility(View.GONE);
 
-        LinearLayoutManager two = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        re.setLayoutManager(two);
-        buttonAdapter = new ButtonAdapter(getContext());
-        re.addItemDecoration(new SpacesItemDecoration(15));
-        re.setAdapter(buttonAdapter);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
-        reOne.setLayoutManager(linearLayoutManager);
-        keLieAdapter = new KeLieAdapter(getContext());
-        reOne.setAdapter(keLieAdapter);
 
 
         //添加滑动监听
@@ -136,7 +152,7 @@ public class PatientHomePageFragment extends BaseFragment implements PatientCont
         });
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void getDepartmentId(Integer i) {
         BasePresenter presenter = getPresenter();
         keLieAdapter.setTextChange(i);
@@ -149,10 +165,8 @@ public class PatientHomePageFragment extends BaseFragment implements PatientCont
 
     @Override
     public void onPatientSuccess(BingYouQuanBean bingYouQuanBean) {
-        String message = bingYouQuanBean.getMessage();
-        Log.i("jjj",""+message);
         if (bingYouQuanBean != null) {
-            //buttonAdapter.setData(bingYouQuanBean.getResult());
+            buttonAdapter.setData(bingYouQuanBean.getResult());
         }
     }
 
@@ -174,7 +188,10 @@ public class PatientHomePageFragment extends BaseFragment implements PatientCont
     @Override
     public void onKeLieSuccess(KeLieBean keLieBean) {
         if (keLieBean != null) {
-            //keLieAdapter.setData(keLieBean.getResult());
+            keLieAdapter.setData(keLieBean.getResult());
+            if (presenter instanceof PatientPresenter) {
+                ((PatientPresenter) presenter).getPatient(keLieBean.getResult().get(0).getId(), 1, 10);
+            }
         }
     }
 

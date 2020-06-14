@@ -67,7 +67,7 @@ public class KeLieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         ((ViewHolder)viewHolder).bei.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(mList.get(i).getId());
+                EventBus.getDefault().postSticky(mList.get(i).getId());
             }
         });
     }

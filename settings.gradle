@@ -1,1 +1,2 @@
-include ':app', ':common', ':component', ':login', ':mm', ':home', ':my', ':patient', ':video', ':wallet', ':inquiry'
+include ':app', ':common', ':component', ':login', ':mm', ':home', ':my', ':patient', ':wallet', ':inquiry'
+include ':video'

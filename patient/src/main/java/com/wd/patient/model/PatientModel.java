@@ -1,5 +1,8 @@
 package com.wd.patient.model;
 
+import android.widget.Toast;
+
+import com.wd.common.base.util.Base.BaseApplication;
 import com.wd.common.base.util.util.RetrofitUtil;
 import com.wd.patient.bean.BingXiangBean;
 import com.wd.patient.bean.BingYouQuanBean;

@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.wd.common.base.util.Base.BaseAcitvity;
+import com.wd.common.base.util.Base.BaseApplication;
 import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.patient.R;
 import com.wd.patient.R2;
@@ -61,7 +62,7 @@ public class PatientSearchActivity extends BaseAcitvity implements PatientSearch
     protected void initData() {
         LinearLayoutManager two = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         souRe.setLayoutManager(two);
-        buttonAdapter = new SearchAdapter(this);
+        buttonAdapter = new SearchAdapter(BaseApplication.getContext());
         souRe.addItemDecoration(new SpacesItemDecoration(15));
         souRe.setAdapter(buttonAdapter);
     }

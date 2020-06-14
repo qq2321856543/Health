@@ -10,13 +10,12 @@ import android.support.v4.view.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bawei.video.fragment.VideoFragment;
 import com.wd.common.base.util.Base.BaseAcitvity;
 import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.home.R;
 import com.wd.home.R2;
 import com.wd.home.fragment.HomeHomeFragment;
-import com.wd.home.fragment.TestFragment;
-import com.wd.home.fragment.TestFragment2;
 import com.wd.patient.fragment.PatientHomePageFragment;
 
 import java.util.ArrayList;
@@ -51,16 +50,16 @@ public class HomeFragmentActivity extends BaseAcitvity {
         data.add("小视频");
         HomeHomeFragment homeHomeFragment = new HomeHomeFragment();
         PatientHomePageFragment patientHomePageFragment = new PatientHomePageFragment();
-        //TestFragment testFragment = new TestFragment();
-        TestFragment2 fragment2 = new TestFragment2();
+        VideoFragment videoFragment = new VideoFragment();
         list.add(homeHomeFragment);
         list.add(patientHomePageFragment);
-        list.add(fragment2);
+        list.add(videoFragment);
         tbHome.addTab(tbHome.newTab().setText(data.get(0)));
         tbHome.addTab(tbHome.newTab().setText(data.get(1)));
         tbHome.addTab(tbHome.newTab().setText(data.get(2)));
         MyViewPager pager = new MyViewPager(getSupportFragmentManager());
         vpHome.setAdapter(pager);
+        vpHome.setOffscreenPageLimit(3);
         tbHome.setupWithViewPager(vpHome);
     }
 

@@ -1,5 +1,9 @@
 package com.wd.patient.presenter;
 
+import android.util.Log;
+import android.widget.Toast;
+
+import com.wd.common.base.util.Base.BaseApplication;
 import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.common.base.util.Base.IBaseView;
 import com.wd.patient.bean.BingXiangBean;

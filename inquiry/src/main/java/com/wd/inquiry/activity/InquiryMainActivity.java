@@ -12,8 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
-import com.alibaba.android.arouter.facade.annotation.Autowired;
-import com.alibaba.android.arouter.facade.annotation.Route;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.wd.common.base.util.Base.BaseAcitvity;
 import com.wd.common.base.util.Base.BasePresenter;
@@ -25,18 +23,16 @@ import com.wd.inquiry.fragment.Fragment_Comprehensive;
 import com.wd.inquiry.fragment.Fragment_Praise;
 import com.wd.inquiry.fragment.Fragment_Price;
 import com.wd.inquiry.fragment.Fragment_Quantity;
-import com.wd.inquiry.icoolor.ICoolor_DoctorList;
 import com.wd.inquiry.icoolor.ICoolor_FindDepartment;
 import com.wd.inquiry.presenter.Presenter_FindDepartment;
-
-import org.greenrobot.eventbus.EventBus;
+import com.wd.patient.fragment.PatientHomePageFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import cn.jpush.im.android.api.JMessageClient;
-@Route(path = "/inquiry/InquiryMainActivity")
+
 public class InquiryMainActivity extends BaseAcitvity implements ICoolor_FindDepartment.IView {
 
     @BindView(R2.id.sdv)
@@ -51,7 +47,6 @@ public class InquiryMainActivity extends BaseAcitvity implements ICoolor_FindDep
     ViewPager vp;
     ArrayList<Fragment> list = new ArrayList<>();
     ArrayList<String> tabs = new ArrayList<>();
-    private int id;
 
     @Override
     protected BasePresenter initPresenter() {
@@ -65,7 +60,7 @@ public class InquiryMainActivity extends BaseAcitvity implements ICoolor_FindDep
 
     @Override
     protected void initView() {
-        id = getIntent().getIntExtra("id", 0);
+
     }
 
     @Override
@@ -85,18 +80,11 @@ public class InquiryMainActivity extends BaseAcitvity implements ICoolor_FindDep
         FragmentPageAdap fragmentPageAdap = new FragmentPageAdap(getSupportFragmentManager());
         vp.setAdapter(fragmentPageAdap);
         tab.setupWithViewPager(vp);
-
     }
 
     @Override
     public void getFindDepartmentSuccess(FindDepartmentBean findDepartmentBean) {
         List<FindDepartmentBean.ResultBean> result = findDepartmentBean.getResult();
-        for (FindDepartmentBean.ResultBean resultBean:result){
-            if (resultBean.getId()==id){
-                resultBean.setIs(true);
-            }
-        }
-       // result.get(0).setIs(true);
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
         rv.setLayoutManager(layoutManager);
         FindDepartmentAdapter findDepartmentAdapter = new FindDepartmentAdapter(this, result);
@@ -104,13 +92,11 @@ public class InquiryMainActivity extends BaseAcitvity implements ICoolor_FindDep
         findDepartmentAdapter.setOnclick(new FindDepartmentAdapter.Onclick() {
             @Override
             public void click(int id,int postion) {
-                //条目变色
                 for (FindDepartmentBean.ResultBean resultBean:result){
                     resultBean.setIs(false);
                 }
                 result.get(postion).setIs(true);
                 findDepartmentAdapter.notifyDataSetChanged();
-
             }
         });
     }
