@@ -14,7 +14,8 @@
         <activity android:name=".activity.activity.LoginForgetPassWordActivity" />
         <activity android:name=".activity.activity.LoginRegisterActivity" />
         <activity android:name=".activity.activity.LoginLonginActivity" />
-        <activity android:name=".activity.activity.LoginLaunchPageActivity">
+        <activity android:name=".activity.activity.LoginLaunchPageActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

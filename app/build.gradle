@@ -41,13 +41,13 @@ android {
             //自己的密码
             keyPassword '123456'
             //自己的keystore文件路径
-            storeFile file('D:\\Android\\WorkSpace6\\Health\\app\\src\\main\\java\\com\\wd\\health\\health_patient.keystore')
+            storeFile file('E:\\Health\\app\\src\\main\\java\\com\\wd\\health\\health_patient.keystore')
             storePassword '123456'
         }
         debug {
             keyAlias 'health'
             keyPassword '123456'
-            storeFile file('D:\\Android\\WorkSpace6\\Health\\app\\src\\main\\java\\com\\wd\\health\\health_patient.keystore')
+            storeFile file('E:\\Health\\app\\src\\main\\java\\com\\wd\\health\\health_patient.keystore')
             storePassword '123456'
         }
     }

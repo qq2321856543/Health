@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.wd.common.base.util.Base.BaseAcitvity;
 import com.wd.common.base.util.Base.BasePresenter;
@@ -32,7 +33,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import cn.jpush.im.android.api.JMessageClient;
-
+@Route(path = "/inquiry/InquiryMainActivity")
 public class InquiryMainActivity extends BaseAcitvity implements ICoolor_FindDepartment.IView {
 
     @BindView(R2.id.sdv)

@@ -16,6 +16,7 @@ import com.wd.common.base.util.Base.BasePresenter;
 import com.wd.home.R;
 import com.wd.home.R2;
 import com.wd.home.fragment.HomeHomeFragment;
+import com.wd.home.fragment.TestFragment;
 import com.wd.patient.fragment.PatientHomePageFragment;
 
 import java.util.ArrayList;
@@ -50,10 +51,10 @@ public class HomeFragmentActivity extends BaseAcitvity {
         data.add("小视频");
         HomeHomeFragment homeHomeFragment = new HomeHomeFragment();
         PatientHomePageFragment patientHomePageFragment = new PatientHomePageFragment();
-        VideoFragment videoFragment = new VideoFragment();
+        //VideoFragment videoFragment = new VideoFragment();
         list.add(homeHomeFragment);
         list.add(patientHomePageFragment);
-        list.add(videoFragment);
+        list.add(new TestFragment());
         tbHome.addTab(tbHome.newTab().setText(data.get(0)));
         tbHome.addTab(tbHome.newTab().setText(data.get(1)));
         tbHome.addTab(tbHome.newTab().setText(data.get(2)));
